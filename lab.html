@@ -46,6 +46,13 @@
             e.classList.remove('selected');
             e.children[0].style.display = "none";
         }
+        function setup(){
+            if (document.getElementById("droparea").children.length > 0) {
+                switchScene("graph");
+            }
+            else alert("Please set a sample into the machine");
+                
+        }
     </script>
 </head>
 
@@ -99,7 +106,7 @@
         <div class="apparatus flowCytometryMachine">
             <div id="droparea" class="dropArea ui-droppable" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         </div>
-        <div class="apparatus computer"><button class="monitor-button">Set up Experiment</button></div>
+        <div class="apparatus computer"><button class="monitor-button" onclick="setup()">Set up Experiment</button></div>
     </div>
 </body>
 <grammarly-desktop-integration data-grammarly-shadow-root="true"></grammarly-desktop-integration>

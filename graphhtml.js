@@ -101,60 +101,79 @@ var graphDOM = '<div id="container" class="container" style="max-width: 900px; m
 '<!--Small Graphs-->'+
 '<div class="col-3 sm-graph-col1">'+
 '<!--Small Graph 1-->'+
-'<div id="jxgbox-3" class="jxgbox jxgbox-top">'+
-'<div class="col-4">'+
+'<div class="graphContainer">'+
+'<div id="jxgbox-3" class="jxgbox jxgbox-top dashed">'+
+'<div class="graphBtnContainerMain">'+
 '<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatterGraph1()"> Add Scatter Plot</button>'+
 '<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogramGraph1()"> Add Histogram</button>'+
 '</div>'+
-'<div id="scatterplot1" class="col" style="display:none;">'+
+'<div id="axesPopupSmGraph1" class="axesPopup axesPopupSmGraph1">'+
+'<div id="scatterplot1">'+
 '<div class="row">'+
-'<div class="col-2">'+
+'<div class="col-2 xAxisText">'+
 'X'+
 '</div>'+
-'<div class="col-10">'+
-'<select id="sp-x1" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph1()">'+
-'<option value="1" selected >None</option>'+
+'<div class="col-6">'+
+'<select id="sp-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"'+
+'onchange="onSelectGraph1()">'+
+'<option value="1" selected>None</option>'+
 '<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
+'<option value="3">SSC</option>'+
+'<option value="4">Green</option>'+
+'<option value="5">Orange</option>'+
 '</select>'+
 '</div>'+
 '</div>'+
 '<div class="row">'+
-'<div class="col-2">'+
+'<div class="col-2 xAxisText">'+
 'Y'+
 '</div>'+
-'<div class="col-10">'+
-'<select id="sp-y1" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph1()">'+
-'<option value="1" selected >None</option>'+
+'<div class="col-6">'+
+'<select id="sp-y1" class="form-select form-select-sm" aria-label=".form-select-sm example"'+
+'onchange="onSelectGraph1()">'+
+'<option value="1" selected>None</option>'+
 '<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
+'<option value="3">SSC</option>'+
+'<option value="4">Green</option>'+
+'<option value="5">Orange</option>'+
 '</select>'+
 '</div>'+
 '</div>'+
 '</div>'+
-'<div id="histogram1" class="col" style="display: none;">'+
+'<div id="histogram1">'+
 '<div class="row">'+
-'<div class="col-2">'+
+'<div class="col-2 xAxisText">'+
 'X'+
 '</div>'+
-'<div class="col-10">'+
-'<select id="ht-x1" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph1()">'+
-'<option value="1" selected >None</option>'+
+'<div class="col-6">'+
+'<select id="ht-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"'+
+'onchange="onSelectGraph1()">'+
+'<option value="1" selected>None</option>'+
 '<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
+'<option value="3">SSC</option>'+
+'<option value="4">Green</option>'+
+'<option value="5">Orange</option>'+
 '</select>'+
 '</div>'+
 '</div>'+
 '</div>'+
-'<div id="CreatBtnBx1" style="display: none;" class="col-2">'+
-'<button id="CreatBtn1" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph1()"> Create</button>'+
+'<div id="CreatBtnBx1" class="col-2">'+
+'<button id="CreatBtn1" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled'+
+'onclick="createGraph1()"> Create</button>'+
 '</div>'+
+'</div>'+
+'</div>'+
+'<div id="xAxis1" class="xAxis" style="visibility: hidden;"></div>' +
+'<div id="yAxis1" class="yAxis" style="visibility: hidden;"></div>' +
+'<div id="xLabel1"></div>' +
+'<div id="yLabel1"></div>' +
+'<input id="closeGraph1" class="close" onclick="resetBrd(\'1\')">' +
 '</div>'+
 '<!--Small Graph 1 Ends-->'+
 ''+
 '<!--Small Graph 2-->'+
-'<div id="jxgbox-4" class="jxgbox jxgbox-bot">'+
-'<div class="col-4">'+
+'<div id="jxgbox-4" class="jxgbox jxgbox-bot dashed">'+
+'<div class="graphBtnContainerMain">'+
 '<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatterGraph2(\'graph2\')"> Add Scatter Plot</button>'+
 '<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogramGraph2(\'graph2\')"> Add Histogram</button>'+
 '</div>'+
@@ -206,8 +225,8 @@ var graphDOM = '<div id="container" class="container" style="max-width: 900px; m
 '</div>'+
 '<div class="col-3 sm-graph-col2">'+
 '<!--Small Graph 3-->'+
-'<div id="jxgbox-5" class="jxgbox jxgbox-top">'+
-'<div class="col-4">'+
+'<div id="jxgbox-5" class="jxgbox jxgbox-top dashed">'+
+'<div class="graphBtnContainerMain">'+
 '<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatterGraph3(\'graph3\')"> Add Scatter Plot</button>'+
 '<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogramGraph3(\'graph3\')"> Add Histogram</button>'+
 '</div>'+
@@ -258,8 +277,8 @@ var graphDOM = '<div id="container" class="container" style="max-width: 900px; m
 '<!--Small Graph 3 Ends-->'+
 ''+
 '<!--Small Graph 4-->'+
-'<div id="jxgbox-6" class="jxgbox jxgbox-bot">'+
-'<div class="col-4">'+
+'<div id="jxgbox-6" class="jxgbox jxgbox-bot dashed">'+
+'<div class="graphBtnContainerMain">'+
 '<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatterGraph4(\'graph4\')"> Add Scatter Plot</button>'+
 '<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogramGraph4(\'graph4\')"> Add Histogram</button>'+
 '</div>'+

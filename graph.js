@@ -1,15 +1,9 @@
 
 //DOM Script
 //Big graph elements
-var mainSP;
-var mainHT;
-var mainSelectedGraph;
-var mainCreatBtnBx;
-var mainCreatBtn;
-var mainSPXSelect;
-var mainSPYSelect;
-var mainHTXSelect;
-
+var mainSP, mainHT, mainSelectedGraph, mainCreatBtnBx, mainCreatBtn, mainSPXSelect, mainSPYSelect, mainHTXSelect;
+//Small graph 1 elemetns
+var SP1, HT1, SelectedGraph1, CreatBtnBx1, CreatBtn1, SPXSelect1, SPYSelect1, HTXSelect1;
 
 // async function getHtml (html) {
 //     let myObject = await fetch(html);
@@ -45,18 +39,19 @@ function reDefineDOMElem() {
     mainSPYSelect = document.getElementById("sp-yMain");
     mainHTXSelect = document.getElementById("ht-xMain");
     mainSPXSelect.value = mainSPYSelect.value = mainHTXSelect.value = 1;
+
+    SP1 = document.getElementById("scatterplot1");
+    HT1 = document.getElementById("histogram1");
+    SelectedGraph1 = 0;//1=Scatterplot 2=Histogram
+    CreatBtnBx1 = document.getElementById("CreatBtnBx1");
+    CreatBtn1 = document.getElementById("CreatBtn1");
+    SPXSelect1 = document.getElementById("sp-x1");
+    SPYSelect1 = document.getElementById("sp-y1");
+    HTXSelect1 = document.getElementById("ht-x1");
+    SPXSelect1.value = SPYSelect1.value = HTXSelect1.value = 1;
 }
 
-//Small graph 1 elemetns
-// var SP1 = document.getElementById("scatterplot1");
-// var HT1 = document.getElementById("histogram1");
-// var SelectedGraph1 = 0;//1=Scatterplot 2=Histogram
-// var CreatBtnBx1 = document.getElementById("CreatBtnBx1");
-// var CreatBtn1 = document.getElementById("CreatBtn1");
-// var SPXSelect1 = document.getElementById("sp-x1");
-// var SPYSelect1 = document.getElementById("sp-y1");
-// var HTXSelect1 = document.getElementById("ht-x1");
-// SPXSelect1.value = SPYSelect1.value = HTXSelect1.value = 1;
+
 
 //Small graph 2 elemetns
 // var SP2 = document.getElementById("scatterplot2");
@@ -135,117 +130,30 @@ function createGraphMain() {
     createPlotMain();
 
 }
-function setAxis(graph) {
-    var xAxis = document.getElementById("xAxis" + graph);
-    var yAxis = document.getElementById("yAxis" + graph);
-    var xlabel = document.getElementById("xLabel" + graph);
-    var ylabel = document.getElementById("yLabel" + graph);
-
-    switch (document.getElementById("sp-x" + graph).value) {
-        case '2'://FSC
-            xAxis.classList.add("linear");
-            xlabel.innerHTML = 'FSC';
-            break;
-        case '3'://SSC
-            xAxis.classList.add("linear");
-            xlabel.innerHTML = 'SSC';
-            break;
-        case '4'://Green
-            xAxis.classList.add("exp");
-            xlabel.innerHTML = 'Green';
-            break;
-        case '5'://Orange
-            xAxis.classList.add("exp");
-            xlabel.innerHTML = 'Orange';
-            break;
-    }
-
-    switch (document.getElementById("sp-y" + graph).value) {
-        case '2'://FSC
-            yAxis.classList.add("linear");
-            ylabel.innerHTML = 'FSC';
-            break;
-        case '3'://SSC
-            yAxis.classList.add("linear");
-            ylabel.innerHTML = 'SSC';
-            break;
-        case '4'://Green
-            yAxis.classList.add("exp");
-            ylabel.innerHTML = 'Green';
-            break;
-        case '5'://Orange
-            yAxis.classList.add("exp");
-            ylabel.innerHTML = 'Orange';
-            break;
-
-    }
-    switch (document.getElementById("ht-x" + graph).value) {
-        case '2'://FSC
-            xAxis.classList.add("linear");
-            yAxis.classList.add("count");
-            xlabel.innerHTML = 'FSC';
-            ylabel.innerHTML = 'Count';
-            break;
-        case '3'://SSC
-            xAxis.classList.add("linear");
-            yAxis.classList.add("count");
-            xlabel.innerHTML = 'SSC';
-            ylabel.innerHTML = 'Count';
-            break;
-        case '4'://Green
-            xAxis.classList.add("exp");
-            yAxis.classList.add("count");
-            xlabel.innerHTML = 'Green';
-            ylabel.innerHTML = 'Count';
-            break;
-        case '5'://Orange
-            xAxis.classList.add("exp");
-            yAxis.classList.add("count");
-            xlabel.innerHTML = 'Orange';
-            ylabel.innerHTML = 'Count';
-            break;
-
-    }
-    xAxis.style.visibility = 'visible';
-    yAxis.style.visibility = 'visible';
-    xlabel.style.visibility = 'visible';
-    ylabel.style.visibility = 'visible';
-};
-function hideAxis(graph) {
-    var xAxis = document.getElementById("xAxis" + graph);
-    var yAxis = document.getElementById("yAxis" + graph);
-    var xlabel = document.getElementById("xLabel" + graph);
-    var ylabel = document.getElementById("yLabel" + graph);
-    xAxis.classList.remove('linear', 'exp', 'count');
-    yAxis.classList.remove('linear', 'exp', 'count');
-    xAxis.style.visibility = 'hidden';
-    yAxis.style.visibility = 'hidden';
-    xlabel.style.visibility = 'hidden';
-    ylabel.style.visibility = 'hidden';
-}
-
 //End of Main Graph Functions
 
 //Small Graph 1 Fucntions
 function selectScatterGraph1() {
-    if (SP1.style.display === "none") {
-        SPXSelect1.value = SPYSelect1.value = HTXSelect1.value = 1;
-        CreatBtn1.disabled = true;
-        SelectedGraph1 = 1;
-        SP1.style.display = "block";
-        HT1.style.display = "none";
-        CreatBtnBx1.style.display = "block";
-    }
+    hideAxesPopup();
+    document.getElementById("axesPopupSmGraph1").style.display = "block";
+    SPXSelect1.value = SPYSelect1.value = HTXSelect1.value = 1;
+    CreatBtn1.disabled = true;
+    SelectedGraph1 = 1;
+    HT1.style.display = "none";
+    SP1.style.display = "block";
+    CreatBtnBx1.style.display = "block";
+    showAxesPopup = true;
 }
 function selectHistogramGraph1() {
-    if (HT1.style.display === "none") {
-        SPXSelect1.value = SPYSelect1.value = HTXSelect1.value = 1;
-        CreatBtn1.disabled = true;
-        SelectedGraph1 = 2;
-        SP1.style.display = "none";
-        HT1.style.display = "block";
-        CreatBtnBx1.style.display = "block";
-    }
+    hideAxesPopup();
+    document.getElementById("axesPopupSmGraph1").style.display = "block";
+    SPXSelect1.value = SPYSelect1.value = HTXSelect1.value = 1;
+    CreatBtn1.disabled = true;
+    SelectedGraph1 = 2;
+    SP1.style.display = "none";
+    HT1.style.display = "block";
+    CreatBtnBx1.style.display = "block";
+    showAxesPopup = true;
 }
 function onSelectGraph1() {
     if (SelectedGraph1 == 1 && SPXSelect1.value != 1 && SPYSelect1.value != 1) {
@@ -259,11 +167,11 @@ function onSelectGraph1() {
     }
 }
 function createGraph1() {
-    myVar = setInterval(updatePlot1, 50);
-    CreatBtn1.disabled = true;
-    SPXSelect1.disabled = true;
-    SPYSelect1.disabled = true;
-    HTXSelect1.disabled = true;
+    setAxis("1");
+    hideAxesPopup();
+    document.getElementById("jxgbox-3").classList.toggle("dashed");
+    mainCreatBtn.disabled = true;
+    createPlot1();
 }
 
 //Small Graph 2 Fucntions
@@ -392,6 +300,94 @@ function hideAxesPopup() {
         x[i].style.display = "none";
     }
 }
+function setAxis(graph) {
+    var xAxis = document.getElementById("xAxis" + graph);
+    var yAxis = document.getElementById("yAxis" + graph);
+    var xlabel = document.getElementById("xLabel" + graph);
+    var ylabel = document.getElementById("yLabel" + graph);
+
+    switch (document.getElementById("sp-x" + graph).value) {
+        case '2'://FSC
+            xAxis.classList.add("linear");
+            xlabel.innerHTML = 'FSC';
+            break;
+        case '3'://SSC
+            xAxis.classList.add("linear");
+            xlabel.innerHTML = 'SSC';
+            break;
+        case '4'://Green
+            xAxis.classList.add("exp");
+            xlabel.innerHTML = 'Green';
+            break;
+        case '5'://Orange
+            xAxis.classList.add("exp");
+            xlabel.innerHTML = 'Orange';
+            break;
+    }
+
+    switch (document.getElementById("sp-y" + graph).value) {
+        case '2'://FSC
+            yAxis.classList.add("linear");
+            ylabel.innerHTML = 'FSC';
+            break;
+        case '3'://SSC
+            yAxis.classList.add("linear");
+            ylabel.innerHTML = 'SSC';
+            break;
+        case '4'://Green
+            yAxis.classList.add("exp");
+            ylabel.innerHTML = 'Green';
+            break;
+        case '5'://Orange
+            yAxis.classList.add("exp");
+            ylabel.innerHTML = 'Orange';
+            break;
+
+    }
+    switch (document.getElementById("ht-x" + graph).value) {
+        case '2'://FSC
+            xAxis.classList.add("linear");
+            yAxis.classList.add("count");
+            xlabel.innerHTML = 'FSC';
+            ylabel.innerHTML = 'Count';
+            break;
+        case '3'://SSC
+            xAxis.classList.add("linear");
+            yAxis.classList.add("count");
+            xlabel.innerHTML = 'SSC';
+            ylabel.innerHTML = 'Count';
+            break;
+        case '4'://Green
+            xAxis.classList.add("exp");
+            yAxis.classList.add("count");
+            xlabel.innerHTML = 'Green';
+            ylabel.innerHTML = 'Count';
+            break;
+        case '5'://Orange
+            xAxis.classList.add("exp");
+            yAxis.classList.add("count");
+            xlabel.innerHTML = 'Orange';
+            ylabel.innerHTML = 'Count';
+            break;
+
+    }
+    xAxis.style.visibility = 'visible';
+    yAxis.style.visibility = 'visible';
+    xlabel.style.visibility = 'visible';
+    ylabel.style.visibility = 'visible';
+};
+function hideAxis(graph) {
+    var xAxis = document.getElementById("xAxis" + graph);
+    var yAxis = document.getElementById("yAxis" + graph);
+    var xlabel = document.getElementById("xLabel" + graph);
+    var ylabel = document.getElementById("yLabel" + graph);
+    xAxis.classList.remove('linear', 'exp', 'count');
+    yAxis.classList.remove('linear', 'exp', 'count');
+    xAxis.style.visibility = 'hidden';
+    yAxis.style.visibility = 'hidden';
+    xlabel.style.visibility = 'hidden';
+    ylabel.style.visibility = 'hidden';
+}
 //END DOM
 
 //JSXGraph
@@ -436,14 +432,14 @@ function createSlider (){
 var currentSample = 1;
 var mainBrd = null;
 var mainGraph = null;
-// var SmlBrd1 = null;
-// var mainGraph = null;
+var SmlBrd1 = null;
+var SmlGraph1 = null;
 // var SmlBrd2 = null;
-// var mainGraph = null;
+// var SmlGraph2 = null;
 // var SmlBrd3 = null;
-// var mainGraph = null;
+// var SmlGraph3 = null;
 // var SmlBrd4 = null;
-// var mainGraph = null;
+// var SmlGraph4 = null;
 // const SmlBrd1 = JXG.JSXGraph.initBoard('jxgbox-3', {
 //     boundingbox: [-0.1, 12, 12, -0.1], axis: false, showCopyright: false, showInfobox: false, showNavigation: false
 // });
@@ -631,44 +627,175 @@ function updatePlotMain() {
     };
     mainBrd.update();
 };
-function updatePlot1() {
-    if (numx % 40 == 0) {
-        numx = 1;
-    }
-    SmlGraph1.updateDataArray = function () {
-        if (i < 1000) {
-            if (SPXSelect1.value == 2) {
-                var sX = sliderFSC.Value();
-            } else if (SPXSelect1.value == 3) {
-                var sX = sliderSSC.Value();
-            }
-            if (SPYSelect1.value == 2) {
-                var sY = sliderFSC.Value();
-            } else if (SPYSelect1.value == 3) {
-                var sY = sliderSSC.Value();
-            }
-            if (HTXSelect1.value == 2)
-                var sX = sliderFSC.Value();
-            else if (HTXSelect1.value == 3)
-                var sX = sliderSSC.Value();
+//END OF MAINBOARD
 
-            if (SelectedGraph1 == 1) {
-                x = Math.random() * sX / 100;
-                y = Math.random() * sY / 100;
+//SMALLBORD 1
+
+var ScatterSliderX1, ScatterValueX1, ScatterSliderY1, ScatterValueY1;
+var HistoSliderX1, HistoValueX1;
+
+function createPlot1() {
+    let x1 = y1 = x2 = y2 = 0;
+    let sw = 1;
+    if (SelectedGraph1 == 1) {
+        if (SPXSelect1.value === '2' || SPXSelect1.value === '3') {
+            x2 = 2500;
+        }
+        else {
+            x2 = 2500;
+        }
+        if (SPYSelect1.value === '2' || SPYSelect1.value === '3') {
+            y1 = 2500;
+        }
+        else {
+            y1 = 2500;
+        }
+    }
+    else {
+        sw = 1.5;
+        if (HTXSelect1.value === '2' || HTXSelect1.value === '3') {
+            x2 = 2500;
+            y1 = 200;
+        }
+        else {
+            x2 = 1000;
+            y1 = 200;
+        }
+    }
+    SmlBrd1 = JXG.JSXGraph.initBoard('jxgbox-3', {
+        boundingbox: [x1, y1, x2, y2], axis: false, showCopyright: false, showInfobox: false, showNavigation: false
+    });
+    SmlGraph1 = SmlBrd1.create('curve', [[], []], { strokeWidth: sw, strokeColor: 'black' });
+
+    document.getElementById('closeGraph1').style.display = 'inline';
+};
+
+function updatePlot1() {
+    SmlGraph1.updateDataArray = function () {
+        //Set Scatter xAxis Filter multiplier
+        switch (SPXSelect1.value) {
+            case '2'://FSC
+                ScatterSliderX1 = sliderFSC.Value();
+                ScatterValueX1 = samplePoints.FSC[countTime];
+                break;
+            case '3'://SSC
+                ScatterSliderX1 = sliderSSC.Value();
+                ScatterValueX1 = samplePoints.SSC[countTime];
+                break;
+            case '4'://Green
+                ScatterSliderX1 = sliderGreen.Value();
+                ScatterValueX1 = samplePoints.Green[countTime];
+                break;
+            case '5'://Orange
+                ScatterSliderX1 = sliderOrange.Value();
+                ScatterValueX1 = samplePoints.Orange[countTime];
+                break;
+        };
+        //Set Scatter yAxis Filter multiplier
+        switch (SPYSelect1.value) {
+            case '2'://FSC
+                ScatterSliderY1 = sliderFSC.Value();
+                ScatterValueY1 = samplePoints.FSC[countTime];
+                break;
+            case '3'://SSC
+                ScatterSliderY1 = sliderSSC.Value();
+                ScatterValueY1 = samplePoints.SSC[countTime];
+                break;
+            case '4'://Green
+                ScatterSliderY1 = sliderGreen.Value();
+                ScatterValueY1 = samplePoints.Green[countTime];
+                break;
+            case '5'://Orange
+                ScatterSliderY1 = sliderOrange.Value();
+                ScatterValueY1 = samplePoints.Orange[countTime];
+                break;
+        };
+        //Set Histo xAxis Filter multiplier
+        switch (HTXSelect1.value) {
+            case '2'://FSC
+                HistoSliderX1 = sliderFSC.Value();
+                HistoValueX1 = samplePoints.FSC[countTime];
+                break;
+            case '3'://SSC
+                HistoSliderX1 = sliderSSC.Value();
+                HistoValueX1 = samplePoints.SSC[countTime];
+                break;
+            case '4'://Green
+                HistoSliderX1 = sliderGreen.Value();
+                HistoValueX1 = samplePoints.Green[countTime];
+                break;
+            case '5'://Orange
+                HistoSliderX1 = sliderOrange.Value();
+                HistoValueX1 = samplePoints.Orange[countTime];
+                break;
+        };
+        let y, x;
+        if (SelectedGraph1 == 1) {
+            if (SPXSelect1.value === '2' || SPXSelect1.value === '3') {
+                x = Math.floor(ScatterValueX1 * Math.pow(1.2, (ScatterSliderX1 - 100) / 100 * 5) / 100);
             }
             else {
-                x = numx * sX / 2500;
-                countX = this.dataX.filter(value => value == x).length
-                y = (1 + countX) / 80 + 1;
+                if (ScatterValueX1 > 10) {
+                    let value = ScatterValueX1 * Math.pow(1.2, (ScatterSliderX1 - 100) / 100 * 5);
+                    x = Math.floor(Math.log10(value / 10) * 2500 / Math.log10(100000 / 10));
+                }
+                else {
+                    x = -1;
+                }
+            }
+            if (SPYSelect1.value === '2' || SPYSelect1.value === '3') {
+                y = Math.floor(ScatterValueY1 * Math.pow(1.2, (ScatterSliderY1 - 100) / 100 * 5) / 100);
+            }
+            else {
+                if (ScatterValueY1 > 10) {
+                    let value = ScatterValueY1 * Math.pow(1.2, (ScatterSliderY1 - 100) / 100 * 5);
+
+                    y = Math.floor((Math.log10(value) - Math.log10(10)) * 2500 / (Math.log10(100000) - Math.log10(10)));
+                    // console.log((Math.log10(value)-Math.log10(10)) + ";" + y );
+                }
+                else {
+                    y = -1;
+                }
             }
 
-            this.dataX.push(x, x, NaN);
-            this.dataY.push(y, y, NaN);
-            numx++;
         }
+        // log(val)-log(min))/(log(max)-log(min))
+        // (value - min) * size / (max - min)
+        //Histogram
+        else {
+            if (HTXSelect1.value === '2' || HTXSelect1.value === '3') {
+                var value = HistoValueX1 * Math.pow(1.2, (HistoSliderX1 - 100) / 100 * 5);
+                x = Math.floor((value - 0) * 2500 / (250000 - 0));
+            }
+            else {
+                if (HistoValueX1 > 10) {
+                    let value = HistoValueX1 * Math.pow(1.2, (HistoSliderX1 - 100) / 100 * 5);
+                    x = Math.floor(Math.log10(value / 10) * 2500 / Math.log10(100000 / 10));
+                }
+                else {
+                    x = -1;
+                }
+            }
+
+            countX = this.dataX.filter(value => value == x).length / 2;
+            var value = 1 * Math.pow(1.2, (HistoSliderX1 - 100) / 100 * 5);
+            y = Math.floor((value - 0) * 200 / (200 - 0));
+            y += countX
+            // for(let r = 1; r < 3; r++){
+
+            //     y = countX + r * 9;
+            //     this.dataX.push(x, x, NaN);
+            //     this.dataY.push(y, y, NaN);
+            // }
+            // y = countX + 27;
+        }
+        // console.log(x + " ; " + y);
+        // console.log(mainScatterValueY+ " ; " + y);
+        this.dataX.push(x, x, NaN);
+        this.dataY.push(y, y, NaN);
+        countTime++;
     };
     SmlBrd1.update();
-    j++;
 };
 function updatePlot2() {
     if (numx % 40 == 0) {

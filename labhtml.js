@@ -46,5 +46,5 @@ var labDOM = '<div id="scene_Lab" class="scene">'+
 '<div class="apparatus flowCytometryMachine">'+
 '<div id="droparea" class="dropArea ui-droppable" ondrop="drop(event)" ondragover="allowDrop(event)"></div>'+
 '</div>'+
-'<div class="apparatus computer"><button class="monitor-button">Set up Experiment</button></div>'+
+'<div class="apparatus computer"><button class="monitor-button" onclick="setup()">Set up Experiment</button></div>'+
 '</div>'

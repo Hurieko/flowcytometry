@@ -36,3 +36,10 @@ function deselectTube(e) {
     e.classList.remove('selected');
     e.children[0].style.display = "none";
 }
+function setup() {
+    if (document.getElementById("droparea").children.length > 0) {
+        switchScene("graph");
+    }
+    else alert("Please set a sample into the machine");
+
+}

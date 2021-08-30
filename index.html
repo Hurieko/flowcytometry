@@ -36,6 +36,20 @@
     <script src="samplesdata.js"></script>
     <script>
         document.getElementsByTagName("BODY")[0].innerHTML = labDOM;
+        function switchScene (sceneID) {
+            switch (sceneID) {
+                case "graph":
+                    document.getElementsByTagName("BODY")[0].innerHTML = graphDOM;
+                    createSlider();
+                    reDefineDOMElem();
+                    break;
+            
+                default:
+                    document.getElementsByTagName("BODY")[0].innerHTML = labDOM;
+                    break;
+            }
+        }
+        
         // createSlider();
     </script>
 </body>

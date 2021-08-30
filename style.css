@@ -1,6 +1,7 @@
 .container {
     background-color: #b4b4b4;
 }
+
 .top-panel {
     background: url("./assets/images/background-pattern.jpg") repeat 0 0;
     border-radius: 3px 3px 0 0;
@@ -8,53 +9,65 @@
     color: #2FABEB;
     margin-bottom: 10px;
 }
+
 .graph-panel {
     height: 400px;
     padding: 10px 10px 20px 50px;
 }
+
 button {
     margin: auto 0;
 }
+
 #jxgbox-1 {
     display: inline-block;
-    width:290px; 
-    height:100px; 
-    border: 1px; 
+    width: 290px;
+    height: 100px;
+    border: 1px;
     border-color: black;
     background: url("./assets/images/background-pattern.jpg") repeat 0 0;
 }
-#jxgbox-2{
+
+#jxgbox-2 {
     margin-top: 5px;
     width: 304px;
-    height:304px;
+    height: 304px;
 }
+
 .jxgbox-top {
     margin-top: 5px;
     margin-bottom: 20px;
 }
+
 .jxgbox-bot {
     margin-top: 5px;
 }
+
 .jxgbox-top, .jxgbox-bot {
     height: 134px;
     width: 158px;
 }
+
 .ctr-btn {
     width: 115px;
     margin-bottom: 5px;
 }
-.btn-sm{
+
+.btn-sm {
     padding: 2px !important;
     width: 77px !important;
 }
+
 /* .sm-graph-col1{
     padding-left: 40px;
 } */
-.form-select-sm{
+
+.form-select-sm {
     font-size: 0.575em !important;
     width: 110px;
 }
-.jxgbox.dashed {
+
+.jxgbox.dashed, .jxgbox-bot.dashed, .jxgbox-top.dashed {
     border-radius: 0;
     border-color: #949494;
     border-width: 0.1em;
@@ -62,12 +75,14 @@ button {
     background-color: #d0cfcf;
     overflow: visible !important;
 }
-.jxgbox{
+
+.jxgbox {
     border-radius: 0;
     border: none;
     position: relative;
     background-color: #f3f3f3;
 }
+
 .sampleBtn {
     position: relative;
     display: inline-block;
@@ -82,21 +97,25 @@ button {
     line-height: 48px;
     box-sizing: border-box;
 }
+
 .disabled {
     background: #444 linear-gradient(#333, #555);
     color: #aaa;
     opacity: 0.5;
     pointer-events: none;
 }
-.active{
+
+.active {
     background: #2fabeb;
     cursor: pointer;
 }
-.samples{
+
+.samples {
     width: 100%;
     border-bottom: 4px solid #2fabeb;
     text-align: center;
 }
+
 .sampleBtn::before {
     content: "";
     display: block;
@@ -108,46 +127,98 @@ button {
     height: 23px;
     margin: auto;
     background: url("./assets/images/sampleIcon.png") no-repeat;
-        background-size: auto;
+    background-size: auto;
     background-size: 100%;
 }
-.xAxis{
+
+.xAxis {
     position: absolute;
     width: 346px;
     height: 30px;
     background: no-repeat top left;
 }
-.yAxis{
+
+.yAxis {
     position: absolute;
     width: 46px;
     height: 346px;
     background: no-repeat top left;
 }
+
 .xAxis.linear {
     left: 8px;
     bottom: 30px;
     background-image: url("./assets/images/xAxisBigLinear.png");
 }
-.yAxis.linear{
+
+.yAxis.linear {
     left: -35px;
     top: 0px;
     background-image: url("./assets/images/yAxisBigLinear.png");
 }
+
 .xAxis.exp {
     left: 5px;
     bottom: 30px;
     background-image: url("./assets/images/xAxisBigExp.png")
 }
+
 .yAxis.exp {
     right: 386px;
     top: 2px;
     background-image: url("./assets/images/yAxisBigExp.png")
 }
+
 .yAxis.count {
     left: -16px;
     top: 2px;
     background-image: url("./assets/images/yAxisBigCount.png");
 }
+
+.xAxisSm {
+    position: absolute;
+    width: 346px;
+    height: 30px;
+    background: no-repeat top left;
+}
+
+.yAxisSm {
+    position: absolute;
+    width: 46px;
+    height: 346px;
+    background: no-repeat top left;
+}
+
+.xAxisSm.linear {
+    left: 8px;
+    bottom: 30px;
+    background-image: url("./assets/images/xAxisSmallLinear.png");
+}
+
+.yAxisSm.linear {
+    left: -35px;
+    top: 0px;
+    background-image: url("./assets/images/yAxisSmallLinear.png");
+}
+
+.xAxisSm.exp {
+    left: 5px;
+    bottom: 30px;
+    background-image: url("./assets/images/xAxisSmallExp.png")
+}
+
+.yAxisSm.exp {
+    right: 386px;
+    top: 2px;
+    background-image: url("./assets/images/yAxisSmallExp.png")
+}
+
+.yAxisSm.count {
+    left: -16px;
+    top: 2px;
+    background-image: url("./assets/images/yAxisSmallCount.png");
+}
+
 #xLabelMain {
     bottom: 22px;
     right: 105px;
@@ -159,6 +230,7 @@ button {
     font-weight: bold;
     color: #5f5f5f;
 }
+
 #yLabelMain {
     left: -53px;
     font-size: 20px;
@@ -170,6 +242,7 @@ button {
     transform: rotate(-90deg);
     bottom: 200px;
 }
+
 .axesPopup {
     position: absolute;
     background-color: #e8e8e8;
@@ -179,34 +252,68 @@ button {
     padding-top: 5px;
     display: none;
 }
+
 /* .arrow {
     position: absolute;
     top: 187px;
     left: 467px;
     background: #e6e6e6;
 } */
+
 .axesPopupMain {
     top: 110px;
     left: 192px;
     width: 163px;
     height: 90px;
 }
-.axesPopup .xAxisText{
+
+.axesPopupSmGraph1 {
+    top: 28px;
+    left: 126px;
+    width: 163px;
+    height: 90px;
+}
+
+.axesPopupSmGraph2 {
+    top: 28px;
+    left: 126px;
+    width: 163px;
+    height: 90px;
+}
+
+.axesPopupSmGraph3 {
+    top: 28px;
+    left: 126px;
+    width: 163px;
+    height: 90px;
+}
+
+.axesPopupSmGraph4 {
+    top: 28px;
+    left: 126px;
+    width: 163px;
+    height: 90px;
+}
+
+.axesPopup .xAxisText {
     font-size: 18px;
     font-weight: bold;
     color: #727272;
     margin-left: 8px;
 }
+
 .axesPopup .btnCreate {
     box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.4);
     border-radius: 1px;
     cursor: pointer;
     margin-left: 8px;
 }
-.graphContainer{
+
+.graphContainer {
     position: relative;
 }
-.graphBtnContainerMain{
+
+.graphBtnContainerMain {
     width: 78px;
     margin: 0;
     position: absolute;
@@ -214,6 +321,7 @@ button {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
 .graphContainer .close {
     position: absolute;
     top: 5px;
@@ -226,15 +334,18 @@ button {
     cursor: pointer;
     display: none;
 }
+
 .graphContainer .close:hover {
     background-position: 0 -20px;
 }
-.filter{
-    width :60px;
+
+.filter {
+    width: 60px;
     position: relative;
     min-height: 28px;
 }
-.filterLabelFSC{
+
+.filterLabelFSC {
     position: absolute;
     top: -7px;
     width: 45px;
@@ -244,7 +355,8 @@ button {
     border-bottom: 2px solid #30acec;
     color: #fff;
 }
-.filterLabelSSC{
+
+.filterLabelSSC {
     position: absolute;
     top: 17px;
     width: 45px;
@@ -254,7 +366,8 @@ button {
     border-bottom: 2px solid #30acec;
     color: #fff;
 }
-.filterLabelGreen{
+
+.filterLabelGreen {
     position: absolute;
     top: 40px;
     width: 45px;
@@ -264,7 +377,8 @@ button {
     border-bottom: 2px solid #30acec;
     color: #fff;
 }
-.filterLabelOrange{
+
+.filterLabelOrange {
     position: absolute;
     top: 63px;
     width: 45px;
