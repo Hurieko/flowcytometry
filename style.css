@@ -179,12 +179,12 @@ button {
     padding-top: 5px;
     display: none;
 }
-.arrow {
+/* .arrow {
     position: absolute;
     top: 187px;
     left: 467px;
     background: #e6e6e6;
-}
+} */
 .axesPopupMain {
     top: 110px;
     left: 192px;
