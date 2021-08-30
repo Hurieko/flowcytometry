@@ -457,7 +457,7 @@ var SmlGraph1 = null;
 // var SmlGraph2 = SmlBrd2.create('curve', [[], []], { strokeWidth: 1, strokeColor: 'black' });
 // var SmlGraph3 = SmlBrd3.create('curve', [[], []], { strokeWidth: 1, strokeColor: 'black' });
 // var SmlGraph4 = SmlBrd4.create('curve', [[], []], { strokeWidth: 1, strokeColor: 'black' });
-var countTime = 0;
+var countTime, countTime1 = 0;
 var numx = 1;
 
 
@@ -676,57 +676,57 @@ function updatePlot1() {
         switch (SPXSelect1.value) {
             case '2'://FSC
                 ScatterSliderX1 = sliderFSC.Value();
-                ScatterValueX1 = samplePoints.FSC[countTime];
+                ScatterValueX1 = samplePoints.FSC[countTime1];
                 break;
             case '3'://SSC
                 ScatterSliderX1 = sliderSSC.Value();
-                ScatterValueX1 = samplePoints.SSC[countTime];
+                ScatterValueX1 = samplePoints.SSC[countTime1];
                 break;
             case '4'://Green
                 ScatterSliderX1 = sliderGreen.Value();
-                ScatterValueX1 = samplePoints.Green[countTime];
+                ScatterValueX1 = samplePoints.Green[countTime1];
                 break;
             case '5'://Orange
                 ScatterSliderX1 = sliderOrange.Value();
-                ScatterValueX1 = samplePoints.Orange[countTime];
+                ScatterValueX1 = samplePoints.Orange[countTime1];
                 break;
         };
         //Set Scatter yAxis Filter multiplier
         switch (SPYSelect1.value) {
             case '2'://FSC
                 ScatterSliderY1 = sliderFSC.Value();
-                ScatterValueY1 = samplePoints.FSC[countTime];
+                ScatterValueY1 = samplePoints.FSC[countTime1];
                 break;
             case '3'://SSC
                 ScatterSliderY1 = sliderSSC.Value();
-                ScatterValueY1 = samplePoints.SSC[countTime];
+                ScatterValueY1 = samplePoints.SSC[countTime1];
                 break;
             case '4'://Green
                 ScatterSliderY1 = sliderGreen.Value();
-                ScatterValueY1 = samplePoints.Green[countTime];
+                ScatterValueY1 = samplePoints.Green[countTime1];
                 break;
             case '5'://Orange
                 ScatterSliderY1 = sliderOrange.Value();
-                ScatterValueY1 = samplePoints.Orange[countTime];
+                ScatterValueY1 = samplePoints.Orange[countTime1];
                 break;
         };
         //Set Histo xAxis Filter multiplier
         switch (HTXSelect1.value) {
             case '2'://FSC
                 HistoSliderX1 = sliderFSC.Value();
-                HistoValueX1 = samplePoints.FSC[countTime];
+                HistoValueX1 = samplePoints.FSC[countTime1];
                 break;
             case '3'://SSC
                 HistoSliderX1 = sliderSSC.Value();
-                HistoValueX1 = samplePoints.SSC[countTime];
+                HistoValueX1 = samplePoints.SSC[countTime1];
                 break;
             case '4'://Green
                 HistoSliderX1 = sliderGreen.Value();
-                HistoValueX1 = samplePoints.Green[countTime];
+                HistoValueX1 = samplePoints.Green[countTime1];
                 break;
             case '5'://Orange
                 HistoSliderX1 = sliderOrange.Value();
-                HistoValueX1 = samplePoints.Orange[countTime];
+                HistoValueX1 = samplePoints.Orange[countTime1];
                 break;
         };
         let y, x;
@@ -793,7 +793,7 @@ function updatePlot1() {
         // console.log(mainScatterValueY+ " ; " + y);
         this.dataX.push(x, x, NaN);
         this.dataY.push(y, y, NaN);
-        countTime++;
+        countTime1++;
     };
     SmlBrd1.update();
 };
@@ -1022,6 +1022,7 @@ function startPlotting() {
         clearInterval(myVar1);
     }
     countTime = 0;
+    countTime1 = 0;
     if (mainBrd) {
         mainGraph.updateDataArray = function () {
             this.dataX = [];

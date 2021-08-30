@@ -184,7 +184,7 @@ button {
 
 .yAxisSm {
     position: absolute;
-    width: 28px;
+    width: 45px;
     height: 160px;
     background: no-repeat top left;
 }
@@ -205,6 +205,12 @@ button {
     left: -6px;
     bottom: -30px;
     background-image: url("./assets/images/xAxisSmallExp.png")
+}
+
+.yAxisSm.exp {
+    left: -23px;
+    bottom: -22px;
+    background-image: url("./assets/images/yAxisSmallExp.png")
 }
 
 .yAxisSm.count {
