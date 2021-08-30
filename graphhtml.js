@@ -158,16 +158,15 @@ var graphDOM = '<div id="container" class="container" style="max-width: 900px; m
 '</div>'+
 '</div>'+
 '<div id="CreatBtnBx1" class="col-2">'+
-'<button id="CreatBtn1" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled'+
-'onclick="createGraph1()"> Create</button>'+
+'<button id="CreatBtn1" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph1()"> Create</button>'+
 '</div>'+
 '</div>'+
 '</div>'+
-'<div id="xAxis1" class="xAxis" style="visibility: hidden;"></div>' +
-'<div id="yAxis1" class="yAxis" style="visibility: hidden;"></div>' +
+'<div id="xAxis1" class="xAxisSm" style="visibility: hidden;"></div>' +
+'<div id="yAxis1" class="yAxisSm" style="visibility: hidden;"></div>' +
 '<div id="xLabel1"></div>' +
 '<div id="yLabel1"></div>' +
-'<input id="closeGraph1" class="close" onclick="resetBrd(\'1\')">' +
+'<input id="closeGraph1" class="close small" onclick="resetBrd(\'1\')">' +
 '</div>'+
 '<!--Small Graph 1 Ends-->'+
 ''+

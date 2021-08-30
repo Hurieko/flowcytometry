@@ -87,7 +87,7 @@ function reDefineDOMElem() {
 // SPXSelect4.value = SPYSelect4.value = HTXSelect4.value = 1;
 
 
-var myVar = null;
+var myVar, myVar1 = null;
 //Main Graph Control Functions
 function selectScatterMain() {
     hideAxesPopup();
@@ -170,7 +170,7 @@ function createGraph1() {
     setAxis("1");
     hideAxesPopup();
     document.getElementById("jxgbox-3").classList.toggle("dashed");
-    mainCreatBtn.disabled = true;
+    CreatBtn1.disabled = true;
     createPlot1();
 }
 
@@ -916,7 +916,65 @@ function updatePlot4() {
 }
 
 var tempMain = '<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatterMain()"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogramMain()"> Add Histogram</button></div><div id="axesPopupMain" class="axesPopup axesPopupMain"><div class="arrow"></div><div id="scatterplot"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-xMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectMain()"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-yMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectMain()"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-xMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectMain()"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="mainCreatBtnBx" class="col-2"><button id="mainCreatBtn" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraphMain()"> Create</button></div></div>'
-
+var tempSm1 = '<div class="graphBtnContainerMain">' +
+    '<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatterGraph1()"> Add Scatter Plot</button>' +
+    '<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogramGraph1()"> Add Histogram</button>' +
+    '</div>' +
+    '<div id="axesPopupSmGraph1" class="axesPopup axesPopupSmGraph1">' +
+    '<div id="scatterplot1">' +
+    '<div class="row">' +
+    '<div class="col-2 xAxisText">' +
+    'X' +
+    '</div>' +
+    '<div class="col-6">' +
+    '<select id="sp-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"' +
+    'onchange="onSelectGraph1()">' +
+    '<option value="1" selected>None</option>' +
+    '<option value="2">FSC</option>' +
+    '<option value="3">SSC</option>' +
+    '<option value="4">Green</option>' +
+    '<option value="5">Orange</option>' +
+    '</select>' +
+    '</div>' +
+    '</div>' +
+    '<div class="row">' +
+    '<div class="col-2 xAxisText">' +
+    'Y' +
+    '</div>' +
+    '<div class="col-6">' +
+    '<select id="sp-y1" class="form-select form-select-sm" aria-label=".form-select-sm example"' +
+    'onchange="onSelectGraph1()">' +
+    '<option value="1" selected>None</option>' +
+    '<option value="2">FSC</option>' +
+    '<option value="3">SSC</option>' +
+    '<option value="4">Green</option>' +
+    '<option value="5">Orange</option>' +
+    '</select>' +
+    '</div>' +
+    '</div>' +
+    '</div>' +
+    '<div id="histogram1">' +
+    '<div class="row">' +
+    '<div class="col-2 xAxisText">' +
+    'X' +
+    '</div>' +
+    '<div class="col-6">' +
+    '<select id="ht-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"' +
+    'onchange="onSelectGraph1()">' +
+    '<option value="1" selected>None</option>' +
+    '<option value="2">FSC</option>' +
+    '<option value="3">SSC</option>' +
+    '<option value="4">Green</option>' +
+    '<option value="5">Orange</option>' +
+    '</select>' +
+    '</div>' +
+    '</div>' +
+    '</div>' +
+    '<div id="CreatBtnBx1" class="col-2">' +
+    '<button id="CreatBtn1" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled' +
+    ' onclick="createGraph1()"> Create</button>' +
+    '</div>' +
+    '</div>';
 function resetBrd(graph) {
     switch (graph) {
         case 'Main'://main board
@@ -937,12 +995,31 @@ function resetBrd(graph) {
             mainSPXSelect.value = mainSPYSelect.value = mainHTXSelect.value = 1;
 
             break;
+        case '1'://Small Board 1
+            JXG.JSXGraph.freeBoard(SmlBrd1);
+            document.getElementById('jxgbox-3').innerHTML = tempSm1;
+            document.getElementById("jxgbox-3").classList.toggle("dashed");
+            hideAxis('1');
+            document.getElementById('closeGraph1').style.display = 'none';
+
+            SP1 = document.getElementById("scatterplot1");
+            HT1 = document.getElementById("histogram1");
+            SelectedGraph1 = 0;//1=Scatterplot 2=Histogram
+            CreatBtnBx1 = document.getElementById("CreatBtnBx1");
+            CreatBtn1 = document.getElementById("CreatBtn1");
+            SPXSelect1 = document.getElementById("sp-x1");
+            SPYSelect1 = document.getElementById("sp-y1");
+            HTXSelect1 = document.getElementById("ht-x1");
+            SPXSelect1.value = SPYSelect1.value = HTXSelect1.value = 1;
+
+            break;
     }
 }
 
 function startPlotting() {
-    if (myVar) {
+    if (myVar || myVar1) {
         clearInterval(myVar);
+        clearInterval(myVar1);
     }
     countTime = 0;
     if (mainBrd) {
@@ -952,6 +1029,14 @@ function startPlotting() {
         };
         mainBrd.update();
         myVar = setInterval(updatePlotMain, 10)
+    }
+    if (SmlBrd1) {
+        SmlGraph1.updateDataArray = function () {
+            this.dataX = [];
+            this.dataY = [];
+        };
+        SmlBrd1.update();
+        myVar1 = setInterval(updatePlot1, 10)
     }
 
 };
