@@ -56,11 +56,12 @@ function reDefineDOMElem() {
 
     document.getElementById("sample" + currentSample).classList.remove('disabled');
     document.getElementById("sample" + currentSample).classList.add('active');
-    for(var i = 1; i > currentSample; i++){
+    for(var i = 1; i < currentSample; i++){
         document.getElementById("sample" + i).classList.remove('disabled');
         document.getElementById("sample" + i).classList.remove('active');
         document.getElementById("sample" + i).classList.add('done');
     }
+    console.log(currentSample);
 
 }
 
@@ -1081,7 +1082,8 @@ function nextTube() {
         SmlBrd1.update();
         clearInterval(myVar1);
     }
-    dataRecord.push(dataset);
+    // dataRecord.push(dataset);
+    currentSample++;
     switchScene("lab");
 }
 
