@@ -43,7 +43,9 @@
                     createSlider();
                     reDefineDOMElem();
                     break;
-            
+                case "lab":
+                    document.getElementsByTagName("BODY")[0].innerHTML = labDOM;
+                    break;
                 default:
                     document.getElementsByTagName("BODY")[0].innerHTML = labDOM;
                     break;

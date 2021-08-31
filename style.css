@@ -110,6 +110,12 @@ button {
     cursor: pointer;
 }
 
+.done {
+    background: #ccd7dd;
+    cursor: pointer;
+    color: #444;
+}
+
 .samples {
     width: 100%;
     border-bottom: 4px solid #2fabeb;

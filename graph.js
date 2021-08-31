@@ -1,5 +1,9 @@
 
 //DOM Script
+var currentSample = 1;
+var dataset = {
+    id: 'sample' + currentSample
+};
 //Big graph elements
 var mainSP, mainHT, mainSelectedGraph, mainCreatBtnBx, mainCreatBtn, mainSPXSelect, mainSPYSelect, mainHTXSelect;
 //Small graph 1 elemetns
@@ -49,6 +53,15 @@ function reDefineDOMElem() {
     SPYSelect1 = document.getElementById("sp-y1");
     HTXSelect1 = document.getElementById("ht-x1");
     SPXSelect1.value = SPYSelect1.value = HTXSelect1.value = 1;
+
+    document.getElementById("sample" + currentSample).classList.remove('disabled');
+    document.getElementById("sample" + currentSample).classList.add('active');
+    for(var i = 1; i > currentSample; i++){
+        document.getElementById("sample" + i).classList.remove('disabled');
+        document.getElementById("sample" + i).classList.remove('active');
+        document.getElementById("sample" + i).classList.add('done');
+    }
+
 }
 
 
@@ -429,7 +442,7 @@ function createSlider (){
         precision: 0
     });
 } 
-var currentSample = 1;
+
 var mainBrd = null;
 var mainGraph = null;
 var SmlBrd1 = null;
@@ -1017,13 +1030,10 @@ function resetBrd(graph) {
 }
 
 function startPlotting() {
-    if (myVar || myVar1) {
-        clearInterval(myVar);
-        clearInterval(myVar1);
-    }
     countTime = 0;
     countTime1 = 0;
     if (mainBrd) {
+        clearInterval(myVar);
         mainGraph.updateDataArray = function () {
             this.dataX = [];
             this.dataY = [];
@@ -1032,6 +1042,7 @@ function startPlotting() {
         myVar = setInterval(updatePlotMain, 10)
     }
     if (SmlBrd1) {
+        clearInterval(myVar1);
         SmlGraph1.updateDataArray = function () {
             this.dataX = [];
             this.dataY = [];
@@ -1041,6 +1052,42 @@ function startPlotting() {
     }
 
 };
+
+var dataRecord = [];
+
+function nextTube() {
+    countTime = 0;
+    countTime1 = 0;
+
+    
+
+    if (mainBrd) {
+        mainGraph.updateDataArray = function () {
+            dataset.dataXMain = this.dataX;
+            dataset.dataYMain = this.dataY;
+            this.dataX = [];
+            this.dataY = [];
+        };
+        mainBrd.update();
+        clearInterval(myVar);
+    }
+    if (SmlBrd1) {
+        SmlGraph1.updateDataArray = function () {
+            dataset.dataX1 = this.dataX;
+            dataset.dataY1 = this.dataY;
+            this.dataX = [];
+            this.dataY = [];
+        };
+        SmlBrd1.update();
+        clearInterval(myVar1);
+    }
+    dataRecord.push(dataset);
+    switchScene("lab");
+}
+
+function reviewGraph(id){
+
+}
     // if(i>=100000){
     //     
     // }
