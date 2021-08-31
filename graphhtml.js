@@ -3,10 +3,10 @@ var graphDOM = '<div id="container" class="container" style="max-width: 900px; m
 '<div class="row top-panel">'+
 '<div class="col-5">'+
 '<div class="samples">'+
-'<div id="sample1" class="sampleBtn active" onclick(reviewGraph("1"))>A</div>'+
-'<div id="sample2" class="sampleBtn disabled" onclick(reviewGraph("2")>B</div>'+
-'<div id="sample3" class="sampleBtn disabled" onclick(reviewGraph("3")>C</div>'+
-'<div id="sample4" class="sampleBtn disabled" onclick(reviewGraph("4")>D</div>'+
+'<div id="sample1" class="sampleBtn active" onclick="reviewGraph(1)">A</div>'+
+'<div id="sample2" class="sampleBtn disabled" onclick="reviewGraph(2)">B</div>'+
+'<div id="sample3" class="sampleBtn disabled" onclick="reviewGraph(3)">C</div>'+
+'<div id="sample4" class="sampleBtn disabled" onclick="reviewGraph(4)">D</div>'+
 '</div>'+
 'Sample ID'+
 '</div>'+

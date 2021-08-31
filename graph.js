@@ -480,32 +480,33 @@ var mainHistoSliderX, mainHistoValueX;
 
 function createPlotMain() {
     let x1 = y1 = x2 = y2 = 0;
-    let sw = 1;
+    let sw = 2;
     if (mainSelectedGraph == 1) {
         if (mainSPXSelect.value === '2' || mainSPXSelect.value === '3') {
-            x2 = 2500;
+            x2 = 250;
         }
         else {
-            x2 = 2500;
+            x2 = 100;
         }
         if (mainSPYSelect.value === '2' || mainSPYSelect.value === '3') {
-            y1 = 2500;
+            y1 = 250;
         }
         else {
-            y1 = 2500;
+            y1 = 100;
         }
     }
     else {
         sw = 1.5;
         if (mainHTXSelect.value === '2' || mainHTXSelect.value === '3') {
-            x2 = 2500;
-            y1 = 200;
+            x2 = 250;
+            y1 = 400;
         }
         else {
-            x2 = 1000;
-            y1 = 200;
+            x2 = 100;
+            y1 = 400;
         }
     }
+    dataset.boundingboxMain = [x1, y1, x2, y2];
     mainBrd = JXG.JSXGraph.initBoard('jxgbox-2', {
         boundingbox: [x1, y1, x2, y2], axis: false, showCopyright: false, showInfobox: false, showNavigation: false
     });
@@ -576,25 +577,25 @@ function updatePlotMain() {
         let y, x;
         if (mainSelectedGraph == 1) {
             if (mainSPXSelect.value === '2' || mainSPXSelect.value === '3') {
-                x = Math.floor(mainScatterValueX * Math.pow(1.2, (mainScatterSliderX - 100) / 100 * 5) / 100);
+                x = Math.floor(mainScatterValueX * Math.pow(1.2, (mainScatterSliderX - 100) / 100 * 5) / 1000);
             }
             else {
                 if (mainScatterValueX > 10) {
-                    let value = mainScatterValueX * Math.pow(1.2, (mainScatterSliderX - 100) / 100 * 5);
-                    x = Math.floor(Math.log10(value / 10) * 2500 / Math.log10(100000 / 10));
+                    let value = mainScatterValueX * Math.pow(1.2, (mainScatterSliderX - 100) / 100 * 5) /1000;
+                    x = Math.floor(Math.log10(value / 10) * 100 / Math.log10(100000 / 10));
                 }
                 else {
                     x = -1;
                 }
             }
             if (mainSPYSelect.value === '2' || mainSPYSelect.value === '3') {
-                y = Math.floor(mainScatterValueY * Math.pow(1.2, (mainScatterSliderY - 100) / 100 * 5) / 100);
+                y = Math.floor(mainScatterValueY * Math.pow(1.2, (mainScatterSliderY - 100) / 100 * 5) / 1000);
             }
             else {
                 if (mainScatterValueY > 10) {
-                    let value = mainScatterValueY * Math.pow(1.2, (mainScatterSliderY - 100) / 100 * 5);
+                    let value = mainScatterValueY * Math.pow(1.2, (mainScatterSliderY - 100) / 100 * 5) / 1000;
 
-                    y = Math.floor((Math.log10(value) - Math.log10(10)) * 2500 / (Math.log10(100000) - Math.log10(10)));
+                    y = Math.floor((Math.log10(value) - Math.log10(10)) * 100 / (Math.log10(100000) - Math.log10(10)));
                     // console.log((Math.log10(value)-Math.log10(10)) + ";" + y );
                 }
                 else {
@@ -605,26 +606,26 @@ function updatePlotMain() {
         }
         // log(val)-log(min))/(log(max)-log(min))
         // (value - min) * size / (max - min)
+
         //Histogram
         else {
             if (mainHTXSelect.value === '2' || mainHTXSelect.value === '3') {
-                var value = mainHistoValueX * Math.pow(1.2, (mainHistoSliderX - 100) / 100 * 5);
-                x = Math.floor((value - 0) * 2500 / (250000 - 0));
+                // var value = mainHistoValueX * Math.pow(1.2, (mainHistoSliderX - 100) / 100 * 5) / 1000;
+                x = Math.floor(mainHistoValueX * Math.pow(1.2, (mainHistoSliderX - 100) / 100 * 5) / 1000);
+                // x = Math.floor((value - 0) * 250 / (250000 - 0));
             }
             else {
-                if (mainHistoValueX > 10) {
-                    let value = mainHistoValueX * Math.pow(1.2, (mainHistoSliderX - 100) / 100 * 5);
-                    x = Math.floor(Math.log10(value / 10) * 2500 / Math.log10(100000 / 10));
-                }
-                else {
-                    x = -1;
-                }
+                    let value = mainHistoValueX * Math.pow(1.2, (mainHistoSliderX - 100) / 100 * 5) / 1000;
+                    x = Math.floor(Math.log10(value / 10) * 100 / Math.log10(100000 / 10));
             }
 
             countX = this.dataX.filter(value => value == x).length / 2;
-            var value = 1 * Math.pow(1.2, (mainHistoSliderX - 100) / 100 * 5);
-            y = Math.floor((value - 0) * 200 / (200 - 0));
-            y += countX
+            // var value = 1 * Math.pow(1.2, (mainHistoSliderX - 100) / 100 * 5);
+            // y = Math.floor((value - 0) * 200 / (200 - 0));
+            y = countX;
+            this.dataX.push(x, x, NaN);
+            this.dataY.push(y, y, NaN);
+            y = countX + 1;
             // for(let r = 1; r < 3; r++){
 
             //     y = countX + r * 9;
@@ -633,7 +634,7 @@ function updatePlotMain() {
             // }
             // y = countX + 27;
         }
-        // console.log(x + " ; " + y);
+        console.log(x + " ; " + y + ";" + countX);
         // console.log(mainScatterValueY+ " ; " + y);
         this.dataX.push(x, x, NaN);
         this.dataY.push(y, y, NaN);
@@ -1082,13 +1083,38 @@ function nextTube() {
         SmlBrd1.update();
         clearInterval(myVar1);
     }
-    // dataRecord.push(dataset);
+    dataRecord.push(dataset);
     currentSample++;
     switchScene("lab");
 }
 
 function reviewGraph(id){
+    
+    switch (id) {
+        case 1:
+            currentSample = 1;
+            if (mainBrd) { JXG.JSXGraph.freeBoard(mainBrd);}
+            if (SmlBrd1) { JXG.JSXGraph.freeBoard(SmlBrd1); }
+            document.getElementById("jxgbox-2").classList.toggle("dashed");
+            document.getElementById("jxgbox-3").classList.toggle("dashed");
+            document.getElementById('closeGraphMain').style.display = 'none';
+            document.getElementById('closeGraph1').style.display = 'none';
+            mainBrd = JXG.JSXGraph.initBoard('jxgbox-2', {
+                boundingbox: dataRecord[0].boundingboxMain, axis: false, showCopyright: false, showInfobox: false, showNavigation: false
+            });
+            mainGraph = mainBrd.create('curve', [[], []], { strokeWidth: 1, strokeColor: 'black' });
+            mainGraph.updateDataArray = function () {
+                this.dataX = dataRecord[0].dataXMain;
+                this.dataY = dataRecord[0].dataYMain;
+            };
+            mainBrd.update();
+            break;
+    
+        default:
+            break;
+    }
 
+    
 }
     // if(i>=100000){
     //     
