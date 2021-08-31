@@ -510,7 +510,7 @@ function createPlotMain() {
     mainBrd = JXG.JSXGraph.initBoard('jxgbox-2', {
         boundingbox: [x1, y1, x2, y2], axis: false, showCopyright: false, showInfobox: false, showNavigation: false
     });
-    mainGraph = mainBrd.create('curve', [[], []], { strokeWidth: sw, strokeColor: 'black' });
+    mainGraph = mainBrd.create('curve', [[], []], { strokeWidth: sw, strokeColor: 'black', highlight: false });
 
     document.getElementById('closeGraphMain').style.display = 'inline';
 };
@@ -680,7 +680,7 @@ function createPlot1() {
     SmlBrd1 = JXG.JSXGraph.initBoard('jxgbox-3', {
         boundingbox: [x1, y1, x2, y2], axis: false, showCopyright: false, showInfobox: false, showNavigation: false
     });
-    SmlGraph1 = SmlBrd1.create('curve', [[], []], { strokeWidth: sw, strokeColor: 'black' });
+    SmlGraph1 = SmlBrd1.create('curve', [[], []], { strokeWidth: sw, strokeColor: 'black', highlight: false });
 
     document.getElementById('closeGraph1').style.display = 'inline';
 };
