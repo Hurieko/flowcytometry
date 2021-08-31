@@ -480,7 +480,7 @@ var mainHistoSliderX, mainHistoValueX;
 
 function createPlotMain() {
     let x1 = y1 = x2 = y2 = 0;
-    let sw = 2;
+    let sw = 1;
     if (mainSelectedGraph == 1) {
         if (mainSPXSelect.value === '2' || mainSPXSelect.value === '3') {
             x2 = 250;
