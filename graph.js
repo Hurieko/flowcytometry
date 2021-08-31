@@ -634,7 +634,7 @@ function updatePlotMain() {
             // }
             // y = countX + 27;
         }
-        console.log(x + " ; " + y + ";" + countX);
+        // console.log(x + " ; " + y + ";" + countX);
         // console.log(mainScatterValueY+ " ; " + y);
         this.dataX.push(x, x, NaN);
         this.dataY.push(y, y, NaN);
