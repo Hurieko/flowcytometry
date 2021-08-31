@@ -577,7 +577,7 @@ function updatePlotMain() {
         let y, x;
         if (mainSelectedGraph == 1) {
             if (mainSPXSelect.value === '2' || mainSPXSelect.value === '3') {
-                x = Math.floor(mainScatterValueX * Math.pow(1.2, (mainScatterSliderX - 100) / 100 * 5) / 1000);
+                x = mainScatterValueX * Math.pow(1.2, (mainScatterSliderX - 100) / 100 * 5) / 1000;
             }
             else {
                 if (mainScatterValueX > 10) {
@@ -589,7 +589,7 @@ function updatePlotMain() {
                 }
             }
             if (mainSPYSelect.value === '2' || mainSPYSelect.value === '3') {
-                y = Math.floor(mainScatterValueY * Math.pow(1.2, (mainScatterSliderY - 100) / 100 * 5) / 1000);
+                y = mainScatterValueY * Math.pow(1.2, (mainScatterSliderY - 100) / 100 * 5) / 1000;
             }
             else {
                 if (mainScatterValueY > 10) {
