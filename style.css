@@ -122,6 +122,26 @@ button {
     text-align: center;
 }
 
+.sampleData .labelInput {
+    width: 165px;
+    height: 22px;
+    margin: 10px 0 0 25px;
+    border: none;
+    border-bottom-color: currentcolor;
+    border-bottom-style: none;
+    border-bottom-width: medium;
+    background: transparent;
+    border-bottom: 2px solid #2fabeb;
+    font-size: 16px;
+    color: #bcbcbc;
+}
+
+.sampleData .sampleIdLabel {
+    margin: 5px 0 0 5px;
+    font-size: 12px;
+    color: #2fabeb;
+}
+
 .sampleBtn::before {
     content: "";
     display: block;

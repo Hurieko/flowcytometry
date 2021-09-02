@@ -1032,6 +1032,11 @@ function resetBrd(graph) {
 }
 
 function startPlotting() {
+    var sampleName = document.getElementById("sampleNameInput").value;
+    if (sampleName == "") {
+        showFeedback("NO_SAMPLE_NAME");
+        return false;
+    }
     countTime = 0;
     countTime1 = 0;
     if (mainBrd) {

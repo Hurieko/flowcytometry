@@ -1,18 +1,19 @@
-var graphDOM = '<div id="container" class="container" style="width: 900px; max-width: 900px; max-height: 600px; margin: auto;">'+
+var graphDOM = '<div id="container" class="scene container">'+
 '<!--Control Panel-->'+
 '<div class="row top-panel">'+
-'<div class="col-5">'+
+'<div class="col-5 sampleData">'+
 '<div class="samples">'+
 '<div id="sample1" class="sampleBtn active" onclick="reviewGraph(1)">A</div>'+
 '<div id="sample2" class="sampleBtn disabled" onclick="reviewGraph(2)">B</div>'+
 '<div id="sample3" class="sampleBtn disabled" onclick="reviewGraph(3)">C</div>'+
 '<div id="sample4" class="sampleBtn disabled" onclick="reviewGraph(4)">D</div>'+
 '</div>'+
-'Sample ID'+
+'<div class="sampleIdLabel">Sample ID</div>'+
+'<input id="sampleNameInput" placeholder="Label your sample" class="labelInput"></input>'+
 '</div>'+
 '<div class="col-2">'+
 '<button type="button" class="btn btn-light ctr-btn" onclick="startPlotting()">AcquireData</button>'+
-'<button type="button" class="btn btn-light ctr-btn">RecordData</button>'+
+'<button type="button" class="btn btn-light ctr-btn" onclick="startPlotting()">RecordData</button>'+
 '<button type="button" class="btn btn-light ctr-btn" onclick="nextTube()">NextTube</button>'+
 '</div>'+
 '<div class="col-5 align-self-center">'+
