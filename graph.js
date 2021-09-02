@@ -609,14 +609,16 @@ function updatePlotMain() {
 
         //Histogram
         else {
+            //Linear Scale
             if (mainHTXSelect.value === '2' || mainHTXSelect.value === '3') {
                 // var value = mainHistoValueX * Math.pow(1.2, (mainHistoSliderX - 100) / 100 * 5) / 1000;
                 x = Math.floor(mainHistoValueX * Math.pow(1.2, (mainHistoSliderX - 100) / 100 * 5) / 1000);
                 // x = Math.floor((value - 0) * 250 / (250000 - 0));
             }
             else {
-                    let value = mainHistoValueX * Math.pow(1.2, (mainHistoSliderX - 100) / 100 * 5) / 1000;
-                    x = Math.floor(Math.log10(value / 10) * 100 / Math.log10(100000 / 10));
+                //Exponention Scale
+                    let value = mainHistoValueX * Math.pow(1.2, (mainHistoSliderX - 100) / 100 * 5) * 1000;
+                    x = Math.floor(Math.log10(value / 10) * 100 / Math.log10(100000 / 10)) / 1000;
             }
 
             countX = this.dataX.filter(value => value == x).length / 2;
@@ -634,7 +636,7 @@ function updatePlotMain() {
             // }
             // y = countX + 27;
         }
-        // console.log(x + " ; " + y + ";" + countX);
+        // console.log(x + " ; " + y);
         // console.log(mainScatterValueY+ " ; " + y);
         this.dataX.push(x, x, NaN);
         this.dataY.push(y, y, NaN);
