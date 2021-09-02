@@ -38,8 +38,49 @@ function deselectTube(e) {
 }
 function setup() {
     if (document.getElementById("droparea").children.length > 0) {
-        switchScene("graph");
+        switch (document.getElementById("droparea").children[0].id){
+            case "tube1":
+                if (numOfUsedSample >= 1) {
+                    showFeedback("SAMPLE_ORDER_REPEAT");
+                }
+                else{
+                    switchScene("graph");
+                }
+                break;
+            case "tube2":
+                if (numOfUsedSample === 1) {
+                    switchScene("graph");
+                } 
+                else if (numOfUsedSample >= 1) {
+                    showFeedback("SAMPLE_ORDER_REPEAT");
+                }
+                else showFeedback("SAMPLE_ORDER_1");
+                break;
+
+            case "tube3":
+                if (numOfUsedSample === 2) {
+                    switchScene("graph");
+                }
+                else if (numOfUsedSample >= 2) {
+                    showFeedback("SAMPLE_ORDER_REPEAT");
+                }
+                else showFeedback("SAMPLE_ORDER_2");
+                break;
+
+            case "tube4":
+                if (numOfUsedSample === 3) {
+                    switchScene("graph");
+                }
+                else if (numOfUsedSample >= 3) {
+                    showFeedback("SAMPLE_ORDER_REPEAT");
+                }
+                else showFeedback("SAMPLE_ORDER_3");
+                break;
+            default:
+                switchScene("graph");
+                break;
+        }
     }
-    else alert("Please set a sample into the machine");
+    else showFeedback("NO_SAMPLE");
 
 }

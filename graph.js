@@ -1085,6 +1085,7 @@ function nextTube() {
     }
     dataRecord.push(dataset);
     currentSample++;
+    numOfUsedSample++;
     switchScene("lab");
 }
 

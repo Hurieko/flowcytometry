@@ -32,6 +32,22 @@
     <script src="graph.js"></script> 
     <script src="samplesdata.js"></script>
     <script>
+
+        const feedbackMsg = {
+            NO_SAMPLE: "Please put a sample into the machine before starting.",
+            SAMPLE_ORDER_1: "It is essential that you start with the unstained control. Please try again.",
+            SAMPLE_ORDER_REPEAT: "You have already run this sample! Please select another tube.",
+            SAMPLE_ORDER_2: "It is better practice to run the sample which is stained by the shortest wavelength first. Please try again.",
+            SAMPLE_ORDER_3: "You need to set up all of your controls first.Please run those first."
+        }
+        var numOfUsedSample = 0;
+        var feedbackTemp = '<div id="feedback" class="feedback">'+
+                        '<div class="feedbackcontents">'+
+                        '<p id="feedbackTxt">It is essential that you start with the unstained control. Please try again.</p>'+
+                        '<button onclick="closeFeedback()">Close</button>'+
+                        '</div>'+
+                        '</div>';
+
         document.getElementsByTagName("BODY")[0].innerHTML = labDOM;
         function switchScene (sceneID) {
             switch (sceneID) {
@@ -47,6 +63,15 @@
                     document.getElementsByTagName("BODY")[0].innerHTML = labDOM;
                     break;
             }
+        }
+
+        function showFeedback (msg){
+            document.getElementById("container").insertAdjacentHTML("afterbegin" , feedbackTemp);
+            document.getElementById("feedbackTxt").innerHTML = feedbackMsg[msg];
+        }
+        function closeFeedback (){
+            var feedback = document.getElementById("feedback");
+            document.getElementById("container").removeChild(feedback);
         }
         
         // createSlider();

@@ -1,4 +1,4 @@
-var labDOM = '<div id="scene_Lab" class="scene">'+
+var labDOM = '<div id="container" class="scene">'+
 '<div class="uiBlocker"></div>'+
 '<div class="apparatus tubeRack">'+
 '<div id="rack1" class="tubeRackSlot ui-droppable" ondrop="drop(event)" ondragover="allowDrop(event)">'+
