@@ -1,4 +1,4 @@
-var graphDOM = '<div id="container" class="container" style="max-width: 900px; max-height: 600px; margin: auto;">'+
+var graphDOM = '<div id="container" class="container" style="width: 900px; max-width: 900px; max-height: 600px; margin: auto;">'+
 '<!--Control Panel-->'+
 '<div class="row top-panel">'+
 '<div class="col-5">'+
