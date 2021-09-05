@@ -36,64 +36,9 @@ var graphDOM = '<div id="container" class="scene container">'+
 '<!--Graph Panel-->'+
 '<div class="row graph-panel">'+
 '<!--Big Graph-->'+
-'<div class="col-6 graphContainer">'+
+'<div class="col-5 graphContainer">'+
 '<div id="jxgbox-2" class="jxgbox dashed">'+
-'<div class="graphBtnContainerMain">'+
-'<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatterMain()"> Add Scatter Plot</button>'+
-'<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogramMain()"> Add Histogram</button>'+
-'</div>'+
-'<div id="axesPopupMain" class="axesPopup axesPopupMain">'+
-'<div class="arrow"></div>'+
-'<div id="scatterplot">'+
-'<div class="row">'+
-'<div class="col-2 xAxisText">'+
-'X'+
-'</div>'+
-'<div class="col-6">'+
-'<select id="sp-xMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectMain()">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC</option>'+
-'<option value="4">Green</option>'+
-'<option value="5">Orange</option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'<div class="row">'+
-'<div class="col-2 xAxisText">'+
-'Y'+
-'</div>'+
-'<div class="col-6">'+
-'<select id="sp-yMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectMain()">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC</option>'+
-'<option value="4">Green</option>'+
-'<option value="5">Orange</option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'</div>'+
-'<div id="histogram">'+
-'<div class="row">'+
-'<div class="col-2 xAxisText">'+
-'X'+
-'</div>'+
-'<div class="col-6">'+
-'<select id="ht-xMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectMain()">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC</option>'+
-'<option value="4">Green</option>'+
-'<option value="5">Orange</option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'</div>'+
-'<div id="mainCreatBtnBx" class="col-2">'+
-'<button id="mainCreatBtn" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraphMain()"> Create</button>'+
-'</div>'+
-'</div>'+
+`<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('Main')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('Main')"> Add Histogram</button></div><div id="axesPopupMain" class="axesPopup axesPopupMain"><div id="scatterplot"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-xMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelect('Main')"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-yMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelect('Main')"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-xMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelect('Main')"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBxMain" class="col-2"><button id="CreateBtnMain" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('Main')"> Create</button></div></div>`+
 '</div>'+
 '<div id="xAxisMain" class="xAxis" style="visibility: hidden;"></div>'+
 '<div id="yAxisMain" class="yAxis" style="visibility: hidden;"></div>'+
@@ -105,66 +50,9 @@ var graphDOM = '<div id="container" class="scene container">'+
 '<!--Small Graphs-->'+
 '<div class="col-3 sm-graph-col1">'+
 '<!--Small Graph 1-->'+
-'<div class="graphContainer">'+
+'<div class="graphContainer graphContainersm">'+
 '<div id="jxgbox-3" class="jxgbox jxgbox-top dashed">'+
-'<div class="graphBtnContainerMain">'+
-'<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatterGraph1()"> Add Scatter Plot</button>'+
-'<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogramGraph1()"> Add Histogram</button>'+
-'</div>'+
-'<div id="axesPopupSmGraph1" class="axesPopup axesPopupSmGraph1">'+
-'<div id="scatterplot1">'+
-'<div class="row">'+
-'<div class="col-2 xAxisText">'+
-'X'+
-'</div>'+
-'<div class="col-6">'+
-'<select id="sp-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"'+
-'onchange="onSelectGraph1()">'+
-'<option value="1" selected>None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC</option>'+
-'<option value="4">Green</option>'+
-'<option value="5">Orange</option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'<div class="row">'+
-'<div class="col-2 xAxisText">'+
-'Y'+
-'</div>'+
-'<div class="col-6">'+
-'<select id="sp-y1" class="form-select form-select-sm" aria-label=".form-select-sm example"'+
-'onchange="onSelectGraph1()">'+
-'<option value="1" selected>None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC</option>'+
-'<option value="4">Green</option>'+
-'<option value="5">Orange</option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'</div>'+
-'<div id="histogram1">'+
-'<div class="row">'+
-'<div class="col-2 xAxisText">'+
-'X'+
-'</div>'+
-'<div class="col-6">'+
-'<select id="ht-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"'+
-'onchange="onSelectGraph1()">'+
-'<option value="1" selected>None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC</option>'+
-'<option value="4">Green</option>'+
-'<option value="5">Orange</option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'</div>'+
-'<div id="CreatBtnBx1" class="col-2">'+
-'<button id="CreatBtn1" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph1()"> Create</button>'+
-'</div>'+
-'</div>'+
+`<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('1')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('1')"> Add Histogram</button></div><div id="axesPopup1" class="axesPopup axesPopup1"><div id="scatterplot1"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('1')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y1" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('1')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram1"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('1')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx1" class="col-2"><button id="CreateBtn1" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('1')"> Create</button></div></div>`+
 '</div>'+
 '<div id="xAxis1" class="xAxisSm" style="visibility: hidden;"></div>' +
 '<div id="yAxis1" class="yAxisSm" style="visibility: hidden;"></div>' +
@@ -175,160 +63,43 @@ var graphDOM = '<div id="container" class="scene container">'+
 '<!--Small Graph 1 Ends-->'+
 ''+
 '<!--Small Graph 2-->'+
+'<div class="graphContainer graphContainersm">' +
 '<div id="jxgbox-4" class="jxgbox jxgbox-bot dashed">'+
-'<div class="graphBtnContainerMain">'+
-'<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatterGraph2(\'graph2\')"> Add Scatter Plot</button>'+
-'<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogramGraph2(\'graph2\')"> Add Histogram</button>'+
-'</div>'+
-'<div id="scatterplot2" class="col" style="display:none;">'+
-'<div class="row">'+
-'<div class="col-2">'+
-'X'+
-'</div>'+
-'<div class="col-10">'+
-'<select id="sp-x2" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph2(\'graph2\')">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'<div class="row">'+
-'<div class="col-2">'+
-'Y'+
-'</div>'+
-'<div class="col-10">'+
-'<select id="sp-y2" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph2(\'graph2\')">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'</div>'+
-'<div id="histogram2" class="col" style="display: none;">'+
-'<div class="row">'+
-'<div class="col-2">'+
-'X'+
-'</div>'+
-'<div class="col-10">'+
-'<select id="ht-x2" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph2(\'graph2\')">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'</div>'+
-'<div id="CreatBtnBx2" style="display: none;" class="col-2">'+
-'<button id="CreatBtn2" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph2(\'graph2\')"> Create</button>'+
-'</div>'+
-'</div>'+
+`<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('2')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('2')"> Add Histogram</button></div><div id="axesPopup2" class="axesPopup axesPopup2"><div id="scatterplot2"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x2" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('2')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y2" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('2')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram2"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x2" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('2')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx2" class="col-2"><button id="CreateBtn2" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('2')"> Create</button></div></div>`+
+'</div>' +
+'<div id="xAxis2" class="xAxisSm" style="visibility: hidden;"></div>' +
+'<div id="yAxis2" class="yAxisSm" style="visibility: hidden;"></div>' +
+'<div id="xLabel2" class="xlabelSm"></div>' +
+'<div id="yLabel2" class="ylabelSm"></div>' +
+'<input id="closeGraph2" class="close small" onclick="resetBrd(\'2\')">' +
+'</div>' +
 '<!--Small Graph 2 Ends-->'+
 '</div>'+
 '<div class="col-3 sm-graph-col2">'+
 '<!--Small Graph 3-->'+
+'<div class="graphContainer graphContainersm">' +
 '<div id="jxgbox-5" class="jxgbox jxgbox-top dashed">'+
-'<div class="graphBtnContainerMain">'+
-'<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatterGraph3(\'graph3\')"> Add Scatter Plot</button>'+
-'<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogramGraph3(\'graph3\')"> Add Histogram</button>'+
-'</div>'+
-'<div id="scatterplot3" class="col" style="display:none;">'+
-'<div class="row">'+
-'<div class="col-2">'+
-'X'+
-'</div>'+
-'<div class="col-10">'+
-'<select id="sp-x3" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph3(\'graph3\')">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'<div class="row">'+
-'<div class="col-2">'+
-'Y'+
-'</div>'+
-'<div class="col-10">'+
-'<select id="sp-y3" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph3(\'graph3\')">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'</div>'+
-'<div id="histogram3" class="col" style="display: none;">'+
-'<div class="row">'+
-'<div class="col-2">'+
-'X'+
-'</div>'+
-'<div class="col-10">'+
-'<select id="ht-x3" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph3(\'graph3\')">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'</div>'+
-'<div id="CreatBtnBx3" style="display: none;" class="col-2">'+
-'<button id="CreatBtn3" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph3(\'graph3\')"> Create</button>'+
-'</div>'+
-'</div>'+
+`<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('3')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('3')"> Add Histogram</button></div><div id="axesPopup3" class="axesPopup axesPopup3"><div id="scatterplot3"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x3" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('3')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y3" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('3')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram3"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x3" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('3')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx3" class="col-2"><button id="CreateBtn3" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('3')"> Create</button></div></div>`+
+'</div>' +
+'<div id="xAxis3" class="xAxisSm" style="visibility: hidden;"></div>' +
+'<div id="yAxis3" class="yAxisSm" style="visibility: hidden;"></div>' +
+'<div id="xLabel3" class="xlabelSm"></div>' +
+'<div id="yLabel3" class="ylabelSm"></div>' +
+'<input id="closeGraph3" class="close small" onclick="resetBrd(\'3\')">' +
+'</div>' +
 '<!--Small Graph 3 Ends-->'+
 ''+
 '<!--Small Graph 4-->'+
+'<div class="graphContainer graphContainersm">' +
 '<div id="jxgbox-6" class="jxgbox jxgbox-bot dashed">'+
-'<div class="graphBtnContainerMain">'+
-'<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatterGraph4(\'graph4\')"> Add Scatter Plot</button>'+
-'<button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogramGraph4(\'graph4\')"> Add Histogram</button>'+
-'</div>'+
-'<div id="scatterplot4" class="col" style="display:none;">'+
-'<div class="row">'+
-'<div class="col-2">'+
-'X'+
-'</div>'+
-'<div class="col-10">'+
-'<select id="sp-x4" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph4(\'graph4\')">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'<div class="row">'+
-'<div class="col-2">'+
-'Y'+
-'</div>'+
-'<div class="col-10">'+
-'<select id="sp-y4" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph4(\'graph4\')">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'</div>'+
-'<div id="histogram4" class="col" style="display: none;">'+
-'<div class="row">'+
-'<div class="col-2">'+
-'X'+
-'</div>'+
-'<div class="col-10">'+
-'<select id="ht-x4" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelectGraph4(\'graph4\')">'+
-'<option value="1" selected >None</option>'+
-'<option value="2">FSC</option>'+
-'<option value="3">SSC  </option>'+
-'</select>'+
-'</div>'+
-'</div>'+
-'</div>'+
-'<div id="CreatBtnBx4" style="display: none;" class="col-2">'+
-'<button id="CreatBtn4" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph4(\'graph3\')"> Create</button>'+
-'</div>'+
-'</div>'+
+`<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('4')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('4')"> Add Histogram</button></div><div id="axesPopup4" class="axesPopup axesPopup4"><div id="scatterplot4"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x4" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('4')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y4" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('4')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram4"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x4" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('4')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx4" class="col-2"><button id="CreateBtn4" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('4')"> Create</button></div></div>`+
+'</div>' +
+'<div id="xAxis4" class="xAxisSm" style="visibility: hidden;"></div>' +
+'<div id="yAxis4" class="yAxisSm" style="visibility: hidden;"></div>' +
+'<div id="xLabel4" class="xlabelSm"></div>' +
+'<div id="yLabel4" class="ylabelSm"></div>' +
+'<input id="closeGraph4" class="close small" onclick="resetBrd(\'4\')">' +
+'</div>' +
 '<!--Small Graph 4 End-->'+
 '</div>'+
 '</div>'+
