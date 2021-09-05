@@ -772,7 +772,7 @@ function updatePlot(graph) {
             y = countX;
             this.dataX.push(x, x, NaN);
             this.dataY.push(y, y, NaN);
-            y = y + countX -15;
+            y += 1;
             // for(let r = 1; r < 3; r++){
 
             //     y = countX + r * 9;
