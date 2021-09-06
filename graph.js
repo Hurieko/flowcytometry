@@ -610,13 +610,13 @@ function createPlot(graph) {
         }
     }
     else {
-        sw = 1.5;
+        sw = 1.2;
         if (window["HTXSelect" + graph].value === '2' || window["HTXSelect" + graph].value === '3') {
             x2 = 2500;
             y1 = 400;
         }
         else {
-            x2 = 300;
+            x2 = 250;
             y1 = 400;
         }
     }
@@ -763,7 +763,7 @@ function updatePlot(graph) {
             else {
                 //Exponention Scale
                 let value = HistoValueX * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5);
-                x = Math.floor(Math.log10(value / 10) * 300 / Math.log10(100000 / 10));
+                x = Math.floor(Math.log10(value / 10) * 250 / Math.log10(100000 / 10));
             }
 
             countX = this.dataX.filter(value => value == x).length / 2;

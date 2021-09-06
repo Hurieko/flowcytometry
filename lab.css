@@ -1088,6 +1088,7 @@
     top: 0;
     left: 0;
     transition: margin 0.1s;
+    z-index: 2;
 }
 
 .tubeRack .tubeRackSlot .tube.selected::after {
@@ -1229,7 +1230,7 @@
     top: 12px;
     width: 40px;
     position: absolute;
-    z-index: 1;
+    z-index: 3;
 }
 
 .tubeRack .tubeRackSlot:first-child {
