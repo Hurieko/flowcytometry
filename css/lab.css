@@ -782,7 +782,7 @@
     display: block;
     width: 100%;
     height: 200px;
-    background: url("./assets/images/background-pattern.jpg") repeat 0 0;
+    background: url("../assets/images/background-pattern.jpg") repeat 0 0;
     border-radius: 3px 3px 0 0;
 }
 
@@ -904,7 +904,7 @@
 .labBackground {
     width: 100%;
     height: 100%;
-    background: url("./assets/images/labBackground.jpg");
+    background: url("../assets/images/labBackground.jpg");
     /*! background-attachment: fixed; */
     background-position: center 825px;
 }
@@ -915,7 +915,7 @@
     left: 53%;
     width: 295px;
     height: 295px;
-    background: url("./assets/images/drawer.jpg");
+    background: url("../assets/images/drawer.jpg");
     background-position: 0 0;
 }
 
@@ -930,7 +930,7 @@
 }
 
 .tube {
-    background: url("./assets/images/tube.png") no-repeat;
+    background: url("../assets/images/tube.png") no-repeat;
     width: 29px;
     height: 149px;
 }
@@ -938,7 +938,7 @@
 .tube.selected::after {
     content: "";
     display: block;
-    background: url("./assets/images/tubeOutline.png") no-repeat;
+    background: url("../assets/images/tubeOutline.png") no-repeat;
     width: 38px;
     height: 157px;
     position: relative;
@@ -1071,7 +1071,7 @@
 }
 
 .tubeRack .tubeRackSlot {
-    background: url("./assets/images/tubeRack.png") no-repeat;
+    background: url("../assets/images/tubeRack.png") no-repeat;
     height: 127px;
     width: 40px;
     background-position: -51px 0;
@@ -1080,7 +1080,7 @@
 }
 
 .tubeRack .tubeRackSlot .tube {
-    background: url("./assets/images/tube.png") no-repeat;
+    background: url("../assets/images/tube.png") no-repeat;
     width: 29px;
     height: 149px;
     margin-top: -44px;
@@ -1094,7 +1094,7 @@
 .tubeRack .tubeRackSlot .tube.selected::after {
     content: "";
     display: block;
-    background: url("./assets/images/tubeOutline.png") no-repeat;
+    background: url("../assets/images/tubeOutline.png") no-repeat;
     width: 38px;
     height: 157px;
     position: relative;
@@ -1224,7 +1224,7 @@
 }
 
 .tubeRack .tubeRackSlot .rackFront {
-    background: url("./assets/images/tubeRack.png") no-repeat;
+    background: url("../assets/images/tubeRack.png") no-repeat;
     height: 11px;
     background-position: -16px -12px;
     top: 12px;
@@ -1239,7 +1239,7 @@
 }
 
 .tubeRack .tubeRackSlot:first-child .tube {
-    background: url("./assets/images/tube.png") no-repeat;
+    background: url("../assets/images/tube.png") no-repeat;
     width: 29px;
     height: 149px;
     margin-top: -44px;
@@ -1249,7 +1249,7 @@
 .tubeRack .tubeRackSlot:first-child .tube.selected::after {
     content: "";
     display: block;
-    background: url("./assets/images/tubeOutline.png") no-repeat;
+    background: url("../assets/images/tubeOutline.png") no-repeat;
     width: 38px;
     height: 157px;
     position: relative;
@@ -1388,7 +1388,7 @@
 }
 
 .flowCytometryMachine {
-    background: url("./assets/images/flowCytometryMachine.png") no-repeat;
+    background: url("../assets/images/flowCytometryMachine.png") no-repeat;
     width: 400px;
     height: 350px;
     margin-left: -43%;
@@ -1416,7 +1416,7 @@
 }
 
 .flowCytometryMachine .tube {
-    background: url("./assets/images/tube.png") no-repeat;
+    background: url("../assets/images/tube.png") no-repeat;
     width: 29px;
     height: 149px;
     margin: 0 auto;
@@ -1429,7 +1429,7 @@
 .flowCytometryMachine .tube.selected::after {
     content: "";
     display: block;
-    background: url("./assets/images/tubeOutline.png") no-repeat;
+    background: url("../assets/images/tubeOutline.png") no-repeat;
     width: 38px;
     height: 157px;
     position: relative;
@@ -1564,7 +1564,7 @@
 }
 
 .computer {
-    background: url("./assets/images/computer.png") no-repeat;
+    background: url("../assets/images/computer.png") no-repeat;
     width: 380px;
     height: 324px;
     margin-left: 2%;

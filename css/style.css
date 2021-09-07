@@ -3,7 +3,7 @@
 }
 
 .top-panel {
-    background: url("./assets/images/background-pattern.jpg") repeat 0 0;
+    background: url("../assets/images/background-pattern.jpg") repeat 0 0;
     border-radius: 3px 3px 0 0;
     padding: 10px;
     color: #2FABEB;
@@ -25,7 +25,7 @@ button {
     height: 100px;
     border: 1px;
     border-color: black;
-    background: url("./assets/images/background-pattern.jpg") repeat 0 0;
+    background: url("../assets/images/background-pattern.jpg") repeat 0 0;
 }
 
 #jxgbox-2 {
@@ -161,7 +161,7 @@ button {
     width: 9px;
     height: 23px;
     margin: auto;
-    background: url("./assets/images/sampleIcon.png") no-repeat;
+    background: url("../assets/images/sampleIcon.png") no-repeat;
     background-size: auto;
     background-size: 100%;
 }
@@ -183,31 +183,31 @@ button {
 .xAxis.linear {
     left: 8px;
     bottom: 31px;
-    background-image: url("./assets/images/xAxisBigLinear.png");
+    background-image: url("../assets/images/xAxisBigLinear.png");
 }
 
 .yAxis.linear {
     left: -35px;
     top: 0px;
-    background-image: url("./assets/images/yAxisBigLinear.png");
+    background-image: url("../assets/images/yAxisBigLinear.png");
 }
 
 .xAxis.exp {
     left: 5px;
     bottom: 31px;
-    background-image: url("./assets/images/xAxisBigExp.png")
+    background-image: url("../assets/images/xAxisBigExp.png")
 }
 
 .yAxis.exp {
     right: 386px;
     top: 2px;
-    background-image: url("./assets/images/yAxisBigExp.png")
+    background-image: url("../assets/images/yAxisBigExp.png")
 }
 
 .yAxis.count {
     left: -16px;
     top: 2px;
-    background-image: url("./assets/images/yAxisBigCount.png");
+    background-image: url("../assets/images/yAxisBigCount.png");
 }
 
 .xAxisSm {
@@ -227,31 +227,31 @@ button {
 .xAxisSm.linear {
     left: -2px;
     bottom: -30px;
-    background-image: url("./assets/images/xAxisSmallLinear.png");
+    background-image: url("../assets/images/xAxisSmallLinear.png");
 }
 
 .yAxisSm.linear {
     left: -43px;
     top: -4px;
-    background-image: url("./assets/images/yAxisSmallLinear.png");
+    background-image: url("../assets/images/yAxisSmallLinear.png");
 }
 
 .xAxisSm.exp {
     left: -6px;
     bottom: -30px;
-    background-image: url("./assets/images/xAxisSmallExp.png")
+    background-image: url("../assets/images/xAxisSmallExp.png")
 }
 
 .yAxisSm.exp {
     left: -23px;
     bottom: -22px;
-    background-image: url("./assets/images/yAxisSmallExp.png")
+    background-image: url("../assets/images/yAxisSmallExp.png")
 }
 
 .yAxisSm.count {
     left: -27px;
     top: -3px;
-    background-image: url("./assets/images/yAxisSmallCount.png");
+    background-image: url("../assets/images/yAxisSmallCount.png");
 }
 
 #xLabelMain {
@@ -420,7 +420,7 @@ button {
     width: 20px;
     height: 20px;
     padding: 0;
-    background: url("./assets/images/close-graph.png") no-repeat 0 0;
+    background: url("../assets/images/close-graph.png") no-repeat 0 0;
     border: none;
     cursor: pointer;
     display: none;
@@ -433,7 +433,7 @@ button {
     width: 20px;
     height: 20px;
     padding: 0;
-    background: url("./assets/images/close-graph.png") no-repeat 0 0;
+    background: url("../assets/images/close-graph.png") no-repeat 0 0;
     border: none;
     cursor: pointer;
     display: none;
