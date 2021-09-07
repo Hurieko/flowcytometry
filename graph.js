@@ -806,7 +806,7 @@ function updatePlot(graph) {
         
         countTime[graph]++;
     };
-    if (jsonObj[currentSample - 1].FSC.length <= (countTime.Main + jsonObj[currentSample - 1].FSC.length - 100)){
+    if (jsonObj[currentSample - 1].FSC.length <= (countTime.Main + jsonObj[currentSample - 1].FSC.length - 1000)){
         finishPlotting();
         if (isRecording) {
             isDatafinishRecording = true;
