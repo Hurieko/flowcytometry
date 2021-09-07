@@ -496,7 +496,7 @@ function startPlotting() {
             this.dataY = [];
         };
         BrdMain.update();
-        myVar = setInterval(() => { updatePlot("Main") }, 50)
+        myVar = setInterval(() => { updatePlot("Main") }, 1)
     }
     if (Brd1) {
         clearInterval(myVar1);
@@ -505,7 +505,7 @@ function startPlotting() {
             this.dataY = [];
         };
         Brd1.update();
-        myVar1 = setInterval(() => { updatePlot("1") }, 50)
+        myVar1 = setInterval(() => { updatePlot("1") }, 1)
     }
     if (Brd2) {
         clearInterval(myVar2);
@@ -514,7 +514,7 @@ function startPlotting() {
             this.dataY = [];
         };
         Brd2.update();
-        myVar2 = setInterval(() => { updatePlot("2") }, 50)
+        myVar2 = setInterval(() => { updatePlot("2") }, 1)
     }
     if (Brd3) {
         clearInterval(myVar3);
@@ -523,7 +523,7 @@ function startPlotting() {
             this.dataY = [];
         };
         Brd3.update();
-        myVar3 = setInterval(() => { updatePlot("3") }, 50)
+        myVar3 = setInterval(() => { updatePlot("3") }, 1)
     }
     if (Brd4) {
         clearInterval(myVar4);
@@ -532,7 +532,7 @@ function startPlotting() {
             this.dataY = [];
         };
         Brd4.update();
-        myVar4 = setInterval(() => { updatePlot("4") }, 50)
+        myVar4 = setInterval(() => { updatePlot("4") }, 1)
     }
 
 };
@@ -806,7 +806,7 @@ function updatePlot(graph) {
         
         countTime[graph]++;
     };
-    if (jsonObj[currentSample - 1].FSC.length <= (countTime.Main + jsonObj[currentSample - 1].FSC.length - 1000)){
+    if (jsonObj[currentSample - 1].FSC.length <= (countTime.Main + jsonObj[currentSample - 1].FSC.length - 100)){
         finishPlotting();
         if (isRecording) {
             isDatafinishRecording = true;
