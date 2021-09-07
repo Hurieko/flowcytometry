@@ -1,6 +1,7 @@
 
 //DOM Script
 var currentSample = 1;
+var sampleName
 var dataset = {
     id: 'sample' + currentSample
 };
@@ -190,12 +191,13 @@ function hideAxesPopup() {
     }
 }
 function setAxis(graph) {
+    
     var xAxis = document.getElementById("xAxis" + graph);
     var yAxis = document.getElementById("yAxis" + graph);
     var xlabel = document.getElementById("xLabel" + graph);
     var ylabel = document.getElementById("yLabel" + graph);
-
-    switch (document.getElementById("sp-x" + graph).value) {
+    
+    switch (window["SPXSelect" + graph].value) {
         case '2'://FSC
             xAxis.classList.add("linear");
             xlabel.innerHTML = 'FSC';
@@ -214,7 +216,7 @@ function setAxis(graph) {
             break;
     }
 
-    switch (document.getElementById("sp-y" + graph).value) {
+    switch (window["SPYSelect" + graph].value) {
         case '2'://FSC
             yAxis.classList.add("linear");
             ylabel.innerHTML = 'FSC';
@@ -233,7 +235,7 @@ function setAxis(graph) {
             break;
 
     }
-    switch (document.getElementById("ht-x" + graph).value) {
+    switch (window["HTXSelect" + graph].value) {
         case '2'://FSC
             xAxis.classList.add("linear");
             yAxis.classList.add("count");
@@ -281,13 +283,14 @@ function hideAxis(graph) {
 
 //JSXGraph
 var sliderBrd, sliderFSC, sliderSSC, sliderGreen, sliderOrange;
+var sliderFSCCurVal = sliderSSCCurVal = sliderGreenCurVal = sliderOrangeCurVal = 100;
+var allowedSliderChange = true;
 function createSlider (){
    sliderBrd = JXG.JSXGraph.initBoard('jxgbox-1', {
-       boundingbox: [-0.4, 5, 12, 0], axis: false, showCopyright: false, showInfobox: false, showNavigation: false, 
+       boundingbox: [-0.4, 5, 12, 0], axis: false, showCopyright: false, showInfobox: false, showNavigation: false, registerevents: allowedSliderChange
     });
-    //registerevents: false
     // console.log(sliderBrd);
-    sliderFSC = sliderBrd.create('slider', [[0, 4.6], [10, 4.6], [100, 100, 1000]], {
+    sliderFSC = sliderBrd.create('slider', [[0, 4.6], [10, 4.6], [100, sliderFSCCurVal, 1000]], {
         baseline: { strokeColor: 'white' },
         highline: { strokeColor: '#2FABEB' },
         strokeWidth: 0,
@@ -295,7 +298,7 @@ function createSlider (){
         label: { strokeColor: 'white' },
         precision: 0
     });
-    sliderSSC = sliderBrd.create('slider', [[0, 3.4], [10, 3.4], [100, 100, 1000]], {
+    sliderSSC = sliderBrd.create('slider', [[0, 3.4], [10, 3.4], [100, sliderSSCCurVal, 1000]], {
         snapWidth: 100,
         baseline: { strokeColor: 'white' },
         highline: { strokeColor: '#2FABEB' },
@@ -303,7 +306,7 @@ function createSlider (){
         label: { strokeColor: 'white' },
         precision: 0
     });
-    sliderGreen = sliderBrd.create('slider', [[0, 2.2], [10, 2.2], [100, 100, 1000]], {
+    sliderGreen = sliderBrd.create('slider', [[0, 2.2], [10, 2.2], [100, sliderGreenCurVal, 1000]], {
         snapWidth: 100,
         baseline: { strokeColor: 'white' },
         highline: { strokeColor: '#2FABEB' },
@@ -311,7 +314,7 @@ function createSlider (){
         label: { strokeColor: 'white' },
         precision: 0
     });
-    sliderOrange = sliderBrd.create('slider', [[0, 1.0], [10, 1.0], [100, 100, 1000]], {
+    sliderOrange = sliderBrd.create('slider', [[0, 1.0], [10, 1.0], [100, sliderOrangeCurVal, 1000]], {
         snapWidth: 100,
         baseline: { strokeColor: 'white' },
         highline: { strokeColor: '#2FABEB' },
@@ -466,7 +469,7 @@ function resetBrd(graph) {
 function startPlotting() {
     hasDataAcquired = true;
     checkSmallGraphSetup();
-    var sampleName = document.getElementById("sampleNameInput").value;
+    sampleName = document.getElementById("sampleNameInput").value;
     if (sampleName == "") {
         showFeedback("NO_SAMPLE_NAME");
         return false;
@@ -548,55 +551,34 @@ function nextTube() {
         "3": 0,
         "4": 0
     }
+    sliderFSCCurVal = sliderFSC.Value();
+    sliderSSCCurVal = sliderSSC.Value();
+    sliderGreenCurVal = sliderGreen.Value();
+    sliderOrangeCurVal = sliderOrange.Value();
 
     if (BrdMain) {
-        GraphMain.updateDataArray = function () {
-            dataset.dataXMain = this.dataX;
-            dataset.dataYMain = this.dataY;
-            this.dataX = [];
-            this.dataY = [];
-        };
-        BrdMain.update();
+        dataset.dataXMain = GraphMain.dataX;
+        dataset.dataYMain = GraphMain.dataY;
         clearInterval(myVar);
     }
     if (Brd1) {
-        Graph1.updateDataArray = function () {
-            dataset.dataX1 = this.dataX;
-            dataset.dataY1 = this.dataY;
-            this.dataX = [];
-            this.dataY = [];
-        };
-        Brd1.update();
+        dataset.dataX1 = Graph1.dataX;
+        dataset.dataY1 = Graph1.dataY;
         clearInterval(myVar1);
     }
     if (Brd2) {
-        Graph2.updateDataArray = function () {
-            dataset.dataX2 = this.dataX;
-            dataset.dataY2 = this.dataY;
-            this.dataX = [];
-            this.dataY = [];
-        };
-        Brd2.update();
+        dataset.dataX2 = Graph2.dataX;
+        dataset.dataY2 = Graph2.dataY;
         clearInterval(myVar2);
     }
     if (Brd3) {
-        Graph3.updateDataArray = function () {
-            dataset.dataX3 = this.dataX;
-            dataset.dataY3 = this.dataY;
-            this.dataX = [];
-            this.dataY = [];
-        };
-        Brd3.update();
+        dataset.dataX3 = Graph3.dataX;
+        dataset.dataY3 = Graph3.dataY;
         clearInterval(myVar3);
     }
     if (Brd4) {
-        Graph4.updateDataArray = function () {
-            dataset.dataX4 = this.dataX;
-            dataset.dataY4 = this.dataY;
-            this.dataX = [];
-            this.dataY = [];
-        };
-        Brd4.update();
+        dataset.dataX4 = Graph4.dataX;
+        dataset.dataY4 = Graph4.dataY;
         clearInterval(myVar4);
     }
     dataRecord.push(dataset);
@@ -715,57 +697,57 @@ function updatePlot(graph) {
         switch (window["SPXSelect" + graph].value) {
             case '2'://FSC
                 ScatterSliderX = sliderFSC.Value();
-                ScatterValueX = samplePoints.FSC[countTime[graph]];
+                ScatterValueX = jsonObj[currentSample - 1].FSC[countTime[graph]];
                 break;
             case '3'://SSC
                 ScatterSliderX = sliderSSC.Value();
-                ScatterValueX = samplePoints.SSC[countTime[graph]];
+                ScatterValueX = jsonObj[currentSample - 1].SSC[countTime[graph]];
                 break;
             case '4'://Green
                 ScatterSliderX = sliderGreen.Value();
-                ScatterValueX = samplePoints.Green[countTime[graph]];
+                ScatterValueX = jsonObj[currentSample - 1].Green[countTime[graph]];
                 break;
             case '5'://Orange
                 ScatterSliderX = sliderOrange.Value();
-                ScatterValueX = samplePoints.Orange[countTime[graph]];
+                ScatterValueX = jsonObj[currentSample - 1].Orange[countTime[graph]];
                 break;
         };
         //Set Scatter yAxis Filter multiplier
         switch (window["SPYSelect" + graph].value) {
             case '2'://FSC
                 ScatterSliderY = sliderFSC.Value();
-                ScatterValueY = samplePoints.FSC[countTime[graph]];
+                ScatterValueY = jsonObj[currentSample - 1].FSC[countTime[graph]];
                 break;
             case '3'://SSC
                 ScatterSliderY = sliderSSC.Value();
-                ScatterValueY = samplePoints.SSC[countTime[graph]];
+                ScatterValueY = jsonObj[currentSample - 1].SSC[countTime[graph]];
                 break;
             case '4'://Green
                 ScatterSliderY = sliderGreen.Value();
-                ScatterValueY = samplePoints.Green[countTime[graph]];
+                ScatterValueY = jsonObj[currentSample - 1].Green[countTime[graph]];
                 break;
             case '5'://Orange
                 ScatterSliderY = sliderOrange.Value();
-                ScatterValueY = samplePoints.Orange[countTime[graph]];
+                ScatterValueY = jsonObj[currentSample - 1].Orange[countTime[graph]];
                 break;
         };
         //Set Histo xAxis Filter multiplier
         switch (window["HTXSelect"+graph].value) {
             case '2'://FSC
                 HistoSliderX = sliderFSC.Value();
-                HistoValueX = samplePoints.FSC[countTime[graph]];
+                HistoValueX = jsonObj[currentSample - 1].FSC[countTime[graph]];
                 break;
             case '3'://SSC
                 HistoSliderX = sliderSSC.Value();
-                HistoValueX = samplePoints.SSC[countTime[graph]];
+                HistoValueX = jsonObj[currentSample - 1].SSC[countTime[graph]];
                 break;
             case '4'://Green
                 HistoSliderX = sliderGreen.Value();
-                HistoValueX = samplePoints.Green[countTime[graph]];
+                HistoValueX = jsonObj[currentSample - 1].Green[countTime[graph]];
                 break;
             case '5'://Orange
                 HistoSliderX = sliderOrange.Value();
-                HistoValueX = samplePoints.Orange[countTime[graph]];
+                HistoValueX = jsonObj[currentSample - 1].Orange[countTime[graph]];
                 break;
         };
         let y, x;
@@ -821,9 +803,10 @@ function updatePlot(graph) {
         
         this.dataX.push(x, x, NaN);
         this.dataY.push(y, y, NaN);
+        
         countTime[graph]++;
     };
-    if (samplePoints.FSC.length <= (countTime.Main + samplePoints.FSC.length - 1000)){
+    if (jsonObj[currentSample - 1].FSC.length <= (countTime.Main + jsonObj[currentSample - 1].FSC.length - 100)){
         finishPlotting();
         if (isRecording) {
             isDatafinishRecording = true;
@@ -835,39 +818,11 @@ function updatePlot(graph) {
 
 function recordData () {
     if (hasDataAcquired) {
-        
         isRecording = true;
-        document.getElementById('closeGraphMain').style.display = 'none';
-        document.getElementById('closeGraph1').style.display = 'none';
-        document.getElementById('closeGraph2').style.display = 'none';
-        document.getElementById('closeGraph3').style.display = 'none';
-        document.getElementById('closeGraph4').style.display = 'none';
-        sliderFSC.setAttribute({
-            fillColor: '#b4b4b4',
-            highline: { strokeColor: '#d0cfcf' },
-        });
-        sliderSSC.setAttribute({
-            fillColor: '#b4b4b4',
-            highline: { strokeColor: '#d0cfcf' },
-        });
-        sliderGreen.setAttribute({
-            fillColor: '#b4b4b4',
-            highline: { strokeColor: '#d0cfcf' },
-        });
-        sliderOrange.setAttribute({
-            fillColor: '#b4b4b4',
-            highline: { strokeColor: '#d0cfcf' },
-        });
-        sliderBrd.removeEventHandlers();
-        var arrayOfElements = document.getElementsByClassName('graphBtnContainerMain');
+        disableGraphControls();
+    
+        var arrayOfElements = document.getElementsByClassName('ctr-btn');
         var lengthOfArray = arrayOfElements.length;
-
-        for (var i = 0; i < lengthOfArray; i++) {
-            arrayOfElements[i].style.display = 'none';
-        }
-
-        arrayOfElements = document.getElementsByClassName('ctr-btn');
-        lengthOfArray = arrayOfElements.length;
 
         for (var i = 0; i < lengthOfArray; i++) {
             arrayOfElements[i].disabled = 'disable';
@@ -915,5 +870,57 @@ function checkSmallGraphSetup (){
         }
         
     }
-    console.log(smallGraphsCheckList);
+}
+function recreateAllGraphs (){
+    isRecording = false;
+    isDatafinishRecording = false;
+    document.getElementById("sampleNameInput").value = sampleName;
+    if(BrdMain) createGraph("Main");
+    if (Brd1)createGraph("1");
+    if (Brd2)createGraph("2");
+    if (Brd3)createGraph("3");
+    if (Brd4)createGraph("4");
+    disableGraphControls();
+    document.getElementById("sample" + currentSample).classList.remove('disabled');
+    document.getElementById("sample" + currentSample).classList.add('active');
+    for (var i = 1; i < currentSample; i++) {
+        document.getElementById("sample" + i).classList.remove('disabled');
+        document.getElementById("sample" + i).classList.remove('active');
+        document.getElementById("sample" + i).classList.add('done');
+    }
+}
+
+function disableGraphControls () {
+    
+    document.getElementById('closeGraphMain').style.display = 'none';
+    document.getElementById('closeGraph1').style.display = 'none';
+    document.getElementById('closeGraph2').style.display = 'none';
+    document.getElementById('closeGraph3').style.display = 'none';
+    document.getElementById('closeGraph4').style.display = 'none';
+    
+    sliderFSC.setAttribute({
+        fillColor: '#b4b4b4',
+        highline: { strokeColor: '#d0cfcf' },
+    });
+    sliderSSC.setAttribute({
+        fillColor: '#b4b4b4',
+        highline: { strokeColor: '#d0cfcf' },
+    });
+    sliderGreen.setAttribute({
+        fillColor: '#b4b4b4',
+        highline: { strokeColor: '#d0cfcf' },
+    });
+    sliderOrange.setAttribute({
+        fillColor: '#b4b4b4',
+        highline: { strokeColor: '#d0cfcf' },
+    });
+    if (allowedSliderChange) {
+        sliderBrd.removeEventHandlers();
+    }
+    allowedSliderChange = false;
+    var arrayOfElements = document.getElementsByClassName('graphBtnContainerMain');
+    var lengthOfArray = arrayOfElements.length;
+    for (var i = 0; i < lengthOfArray; i++) {
+        arrayOfElements[i].style.display = 'none';
+    }
 }

@@ -65,7 +65,13 @@
                 case "graph":
                     document.getElementsByTagName("BODY")[0].innerHTML = graphDOM;
                     createSlider();
-                    reDefineDOMElem();
+                    
+                    if (numOfUsedSample > 0) {
+                        recreateAllGraphs();
+                    }
+                    else {
+                        reDefineDOMElem();
+                    }
                     break;
                 case "lab":
                     document.getElementsByTagName("BODY")[0].innerHTML = labDOM;
@@ -77,6 +83,9 @@
         }
 
         function showFeedback (msg){
+            if (document.getElementById("feedback")) {
+                closeFeedback();
+            }
             document.getElementById("container").insertAdjacentHTML("afterbegin" , feedbackTemp);
             document.getElementById("feedbackTxt").innerHTML = feedbackMsg[msg];
         }
