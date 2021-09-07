@@ -4,6 +4,11 @@ var currentSample = 1;
 var dataset = {
     id: 'sample' + currentSample
 };
+var isRecording = false;
+var isDatafinishRecording = false;
+var hasDataAcquired = false;
+var mainGraphIsSet = false;
+
 //Big graph elements
 // var SPMain, HTMain, SelectedGraphMain, CreateBtnBxMain, CreateBtnMain, SPXSelectMain, SPYSelectMain, HTXSelectMain;
 var SPMain, HTMain, SelectedGraphMain, CreateBtnBxMain, CreateBtnMain, SPXSelectMain, SPYSelectMain, HTXSelectMain;
@@ -16,6 +21,11 @@ var SP3, HT3, SelectedGraph3, CreateBtnBx3, CreateBtn3, SPXSelect3, SPYSelect3, 
 //Small graph 4 elemetns
 var SP4, HT4, SelectedGraph4, CreateBtnBx4, CreateBtn4, SPXSelect4, SPYSelect4, HTXSelect4;
 
+var smallGraphsCheckList = {
+    hasGreenHisto: false,
+    hasOrangeHisto: false,
+    hasGrnOrnScatter: false
+}
 var showAxesPopup = false;
 
 document.addEventListener('click', function (e) {
@@ -127,30 +137,49 @@ function onSelect(graph) {
     }
 }
 function createGraph(graph) {
-    setAxis(graph);
-    hideAxesPopup();
+    var isWrong = false 
     switch (graph) {
         case "Main":
-            document.getElementById("jxgbox-2").classList.toggle("dashed");
-            break;
-        case "1":
-            document.getElementById("jxgbox-3").classList.toggle("dashed");
-            break;
-        case "2":
-            document.getElementById("jxgbox-4").classList.toggle("dashed");
-            break;
-        case "3":
-            document.getElementById("jxgbox-5").classList.toggle("dashed");
-            break;
-        case "4":
-            document.getElementById("jxgbox-6").classList.toggle("dashed");
-            break;
+            if(SelectedGraphMain != 1){
+                showFeedback("WRONG_MAIN_GRAPH_1");
+                isWrong = true;
+            }
+            else if (window["SPXSelect" + graph].value > 3 || window["SPYSelect" + graph].value > 3) {
+                showFeedback("WRONG_MAIN_GRAPH_2");
+                isWrong = true;
+            }
+            else{
+                document.getElementById("jxgbox-2").classList.toggle("dashed");
+                mainGraphIsSet = true;
+                break;
+            }
     
         default:
+            switch (graph) {
+                case "1":
+                    document.getElementById("jxgbox-3").classList.toggle("dashed");
+                    break;
+                case "2":
+                    document.getElementById("jxgbox-4").classList.toggle("dashed");
+                    break;
+                case "3":
+                    document.getElementById("jxgbox-5").classList.toggle("dashed");
+                    break;
+                case "4":
+                    document.getElementById("jxgbox-6").classList.toggle("dashed");
+                    break;
+            
+                default:
+                    break;
+            }
             break;
     }
-    window["CreateBtn" + graph].disabled = true;
-    createPlot(graph);
+    if (!isWrong) {
+        setAxis(graph);
+        hideAxesPopup();
+        window["CreateBtn" + graph].disabled = true;
+        createPlot(graph);
+    }
 }
 
 function hideAxesPopup() {
@@ -257,6 +286,7 @@ function createSlider (){
        boundingbox: [-0.4, 5, 12, 0], axis: false, showCopyright: false, showInfobox: false, showNavigation: false, 
     });
     //registerevents: false
+    // console.log(sliderBrd);
     sliderFSC = sliderBrd.create('slider', [[0, 4.6], [10, 4.6], [100, 100, 1000]], {
         baseline: { strokeColor: 'white' },
         highline: { strokeColor: '#2FABEB' },
@@ -434,9 +464,19 @@ function resetBrd(graph) {
 }
 
 function startPlotting() {
+    hasDataAcquired = true;
+    checkSmallGraphSetup();
     var sampleName = document.getElementById("sampleNameInput").value;
     if (sampleName == "") {
         showFeedback("NO_SAMPLE_NAME");
+        return false;
+    }
+    else if (!mainGraphIsSet) {
+        showFeedback("NO_MAIN_GRAPH");
+        return false;
+    }
+    else if (!Object.values(smallGraphsCheckList).every(Boolean)) {
+        showFeedback("WRONG_SMALL_GRAPH");
         return false;
     }
     countTime = {
@@ -497,6 +537,10 @@ function startPlotting() {
 var dataRecord = [];
 
 function nextTube() {
+    if (!isDatafinishRecording) {
+        showFeedback("DATA_NOT_RECORDED");
+        return false;
+    }
     countTime = {
         "Main": 0,
         "1": 0,
@@ -773,22 +817,103 @@ function updatePlot(graph) {
             this.dataX.push(x, x, NaN);
             this.dataY.push(y, y, NaN);
             y += 1;
-            // for(let r = 1; r < 3; r++){
-
-            //     y = countX + r * 9;
-            //     this.dataX.push(x, x, NaN);
-            //     this.dataY.push(y, y, NaN);
-            // }
-            // y = countX + 27;
         }
         
         this.dataX.push(x, x, NaN);
         this.dataY.push(y, y, NaN);
         countTime[graph]++;
     };
-    if (samplePoints.FSC.length <= countTime.Main - 1){
-        alert("done"); return false;
+    if (samplePoints.FSC.length <= (countTime.Main + samplePoints.FSC.length - 1000)){
+        finishPlotting();
+        if (isRecording) {
+            isDatafinishRecording = true;
+            document.getElementsByClassName('ctr-btn')[2].disabled = false;
+        }
     }
-    
     window["Brd" + graph].update();
 };
+
+function recordData () {
+    if (hasDataAcquired) {
+        
+        isRecording = true;
+        document.getElementById('closeGraphMain').style.display = 'none';
+        document.getElementById('closeGraph1').style.display = 'none';
+        document.getElementById('closeGraph2').style.display = 'none';
+        document.getElementById('closeGraph3').style.display = 'none';
+        document.getElementById('closeGraph4').style.display = 'none';
+        sliderFSC.setAttribute({
+            fillColor: '#b4b4b4',
+            highline: { strokeColor: '#d0cfcf' },
+        });
+        sliderSSC.setAttribute({
+            fillColor: '#b4b4b4',
+            highline: { strokeColor: '#d0cfcf' },
+        });
+        sliderGreen.setAttribute({
+            fillColor: '#b4b4b4',
+            highline: { strokeColor: '#d0cfcf' },
+        });
+        sliderOrange.setAttribute({
+            fillColor: '#b4b4b4',
+            highline: { strokeColor: '#d0cfcf' },
+        });
+        sliderBrd.removeEventHandlers();
+        var arrayOfElements = document.getElementsByClassName('graphBtnContainerMain');
+        var lengthOfArray = arrayOfElements.length;
+
+        for (var i = 0; i < lengthOfArray; i++) {
+            arrayOfElements[i].style.display = 'none';
+        }
+
+        arrayOfElements = document.getElementsByClassName('ctr-btn');
+        lengthOfArray = arrayOfElements.length;
+
+        for (var i = 0; i < lengthOfArray; i++) {
+            arrayOfElements[i].disabled = 'disable';
+        }
+        document.getElementById('sampleNameInput').disabled = "disable";
+        startPlotting();
+    }
+    else {
+        showFeedback("DATA_NOT_ACQUIRED");
+    }
+}
+
+function finishPlotting () {
+    showFeedback("DATA_FINISHED_PLOTTING");
+    myVar ? clearInterval(myVar) : false;
+    myVar1 ? clearInterval(myVar1) : false;
+    myVar2 ? clearInterval(myVar2) : false;
+    myVar3 ? clearInterval(myVar3) : false;
+    myVar4 ? clearInterval(myVar4) : false;
+}
+var smallGraphsCheckList = {
+    hasGreenHisto: false,
+    hasOrangeHisto: false,
+    hasGrnOrnScatter: false
+}
+function checkSmallGraphSetup (){
+    for (let index = 1; index < 5; index++) {
+        //Check for Scatterplot
+        if (window["SelectedGraph" + index] == 1) {
+            //Check if scatterplot has Green as X and Orange as Y
+            if (window["SPXSelect" + index].value == 4 && window["SPYSelect" + index].value == 5) {
+                smallGraphsCheckList.hasGrnOrnScatter = true;
+            }
+        }
+        //Check for histogram
+        else if (window["SelectedGraph" + index] == 2) {
+            //Check if X Axis is green
+            if (window["HTXSelect" + index].value == 4) {
+                smallGraphsCheckList.hasGreenHisto = true;
+            }
+            //Check if X axis is orange
+            else if (window["HTXSelect" + index].value == 5) {
+                smallGraphsCheckList.hasOrangeHisto = true;
+            }
+        }
+        
+    }
+    console.log(smallGraphsCheckList);
+}

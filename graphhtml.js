@@ -13,7 +13,7 @@ var graphDOM = '<div id="container" class="scene container">'+
 '</div>'+
 '<div class="col-2">'+
 '<button type="button" class="btn btn-light ctr-btn" onclick="startPlotting()">AcquireData</button>'+
-'<button type="button" class="btn btn-light ctr-btn" onclick="startPlotting()">RecordData</button>'+
+'<button type="button" class="btn btn-light ctr-btn" onclick="recordData()">RecordData</button>'+
 '<button type="button" class="btn btn-light ctr-btn" onclick="nextTube()">NextTube</button>'+
 '</div>'+
 '<div class="col-5 align-self-center">'+

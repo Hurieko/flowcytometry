@@ -53,6 +53,11 @@ button {
     margin-bottom: 5px;
 }
 
+.ctr-btn:hover {
+    color: white;
+    background-color: #2FABEB;
+}
+
 .btn-sm {
     padding: 2px !important;
     width: 77px !important;
@@ -329,7 +334,7 @@ button {
     background-color: #e8e8e8;
     border: 1px solid #7e7e7e;
     border-radius: 1px;
-    z-index: 99;
+    z-index: 2;
     padding-top: 5px;
     display: none;
 }
@@ -538,6 +543,10 @@ button {
 .feedbackcontents button:hover {
     background-color: #f8f8f8;
     color: black;
+}
+
+.feedbackcontents p {
+    margin-bottom: 4rem;
 }
 
 .JXGtext {
