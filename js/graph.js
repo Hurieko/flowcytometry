@@ -41,6 +41,7 @@ document.addEventListener('click', function (e) {
 
 //Call this function after changing scene to Re define all dom elem
 function reDefineDOMElem() {
+    
     SPMain = document.getElementById("scatterplot");
     HTMain = document.getElementById("histogram");
     SelectedGraphMain = 0;//1=Scatterplot 2=Histogram
@@ -93,16 +94,15 @@ function reDefineDOMElem() {
 
     document.getElementById("sample" + currentSample).classList.remove('disabled');
     document.getElementById("sample" + currentSample).classList.add('active');
-    for(var i = 1; i < currentSample; i++){
+    for(let i = 1; i < currentSample; i++){
         document.getElementById("sample" + i).classList.remove('disabled');
         document.getElementById("sample" + i).classList.remove('active');
         document.getElementById("sample" + i).classList.add('done');
     }
-    // console.log(currentSample);
 
 }
 
-var myVar, myVar1, myVar2, myVar3, myVar4 = null;
+var myVar, myVar1, myVar2, myVar3, myVar4;
 //Main Graph Control Functions
 function selectScatter (graph) {
     hideAxesPopup();
@@ -138,7 +138,7 @@ function onSelect(graph) {
     }
 }
 function createGraph(graph) {
-    var isWrong = false 
+    let isWrong = false 
     switch (graph) {
         case "Main":
             if(SelectedGraphMain != 1){
@@ -184,18 +184,18 @@ function createGraph(graph) {
 }
 
 function hideAxesPopup() {
-    var x = document.getElementsByClassName("axesPopup");
-    var i;
+    let x = document.getElementsByClassName("axesPopup");
+    let i;
     for (i = 0; i < x.length; i++) {
         x[i].style.display = "none";
     }
 }
 function setAxis(graph) {
     
-    var xAxis = document.getElementById("xAxis" + graph);
-    var yAxis = document.getElementById("yAxis" + graph);
-    var xlabel = document.getElementById("xLabel" + graph);
-    var ylabel = document.getElementById("yLabel" + graph);
+    let xAxis = document.getElementById("xAxis" + graph);
+    let yAxis = document.getElementById("yAxis" + graph);
+    let xlabel = document.getElementById("xLabel" + graph);
+    let ylabel = document.getElementById("yLabel" + graph);
     
     switch (window["SPXSelect" + graph].value) {
         case '2'://FSC
@@ -268,10 +268,10 @@ function setAxis(graph) {
     ylabel.style.visibility = 'visible';
 };
 function hideAxis(graph) {
-    var xAxis = document.getElementById("xAxis" + graph);
-    var yAxis = document.getElementById("yAxis" + graph);
-    var xlabel = document.getElementById("xLabel" + graph);
-    var ylabel = document.getElementById("yLabel" + graph);
+    let xAxis = document.getElementById("xAxis" + graph);
+    let yAxis = document.getElementById("yAxis" + graph);
+    let xlabel = document.getElementById("xLabel" + graph);
+    let ylabel = document.getElementById("yLabel" + graph);
     xAxis.classList.remove('linear', 'exp', 'count');
     yAxis.classList.remove('linear', 'exp', 'count');
     xAxis.style.visibility = 'hidden';
@@ -282,14 +282,14 @@ function hideAxis(graph) {
 //END DOM
 
 //JSXGraph
-var sliderBrd, sliderFSC, sliderSSC, sliderGreen, sliderOrange;
-var sliderFSCCurVal = sliderSSCCurVal = sliderGreenCurVal = sliderOrangeCurVal = 100;
-var allowedSliderChange = true;
+let sliderBrd, sliderFSC, sliderSSC, sliderGreen, sliderOrange;
+let sliderFSCCurVal = sliderSSCCurVal = sliderGreenCurVal = sliderOrangeCurVal = 100;
+let allowedSliderChange = true;
 function createSlider (){
    sliderBrd = JXG.JSXGraph.initBoard('jxgbox-1', {
        boundingbox: [-0.4, 5, 12, 0], axis: false, showCopyright: false, showInfobox: false, showNavigation: false, registerevents: allowedSliderChange
     });
-    // console.log(sliderBrd);
+    
     sliderFSC = sliderBrd.create('slider', [[0, 4.6], [10, 4.6], [100, sliderFSCCurVal, 1000]], {
         baseline: { strokeColor: 'white' },
         highline: { strokeColor: '#2FABEB' },
@@ -335,23 +335,7 @@ var Brd3 = null;
 var Graph3 = null;
 var Brd4 = null;
 var Graph4 = null;
-// const Brd1 = JXG.JSXGraph.initBoard('jxgbox-3', {
-//     boundingbox: [-0.1, 12, 12, -0.1], axis: false, showCopyright: false, showInfobox: false, showNavigation: false
-// });
-// const SmlBrd2 = JXG.JSXGraph.initBoard('jxgbox-4', {
-//     boundingbox: [-0.1, 12, 12, -0.1], axis: false, showCopyright: false, showInfobox: false, showNavigation: false
-// });
-// const SmlBrd3 = JXG.JSXGraph.initBoard('jxgbox-5', {
-//     boundingbox: [-0.1, 12, 12, -0.1], axis: false, showCopyright: false, showInfobox: false, showNavigation: false
-// });
-// const SmlBrd4 = JXG.JSXGraph.initBoard('jxgbox-6', {
-//     boundingbox: [-0.1, 12, 12, -0.1], axis: false, showCopyright: false, showInfobox: false, showNavigation: false
-// });
 
-// var Graph1 = Brd1.create('curve', [[], []], { strokeWidth: 1, strokeColor: '#4E4E4E' });
-// var SmlGraph2 = SmlBrd2.create('curve', [[], []], { strokeWidth: 1, strokeColor: '#4E4E4E' });
-// var SmlGraph3 = SmlBrd3.create('curve', [[], []], { strokeWidth: 1, strokeColor: '#4E4E4E' });
-// var SmlGraph4 = SmlBrd4.create('curve', [[], []], { strokeWidth: 1, strokeColor: '#4E4E4E' });
 var countTime = {
     "Main": 0,
     "1": 0,
@@ -359,12 +343,12 @@ var countTime = {
     "3": 0,
     "4": 0
 }
-var numx = 1;
-var tempMain = `<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('Main')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('Main')"> Add Histogram</button></div><div id="axesPopupMain" class="axesPopup axesPopupMain"><div id="scatterplot"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-xMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelect('Main')"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-yMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelect('Main')"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-xMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelect('Main')"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBxMain" class="col-2"><button id="CreateBtnMain" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('Main')"> Create</button></div></div>`;
-var tempSm1 = `<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('1')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('1')"> Add Histogram</button></div><div id="axesPopup1" class="axesPopup axesPopup1"><div id="scatterplot1"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('1')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y1" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('1')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram1"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('1')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx1" class="col-2"><button id="CreateBtn1" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('1')"> Create</button></div></div>`;
-var tempSm2 = `<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('2')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('2')"> Add Histogram</button></div><div id="axesPopup2" class="axesPopup axesPopup2"><div id="scatterplot2"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x2" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('2')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y2" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('2')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram2"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x2" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('2')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx2" class="col-2"><button id="CreateBtn2" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('2')"> Create</button></div></div>`;
-var tempSm3 = `<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('3')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('3')"> Add Histogram</button></div><div id="axesPopup3" class="axesPopup axesPopup3"><div id="scatterplot3"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x3" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('3')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y3" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('3')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram3"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x3" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('3')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx3" class="col-2"><button id="CreateBtn3" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('3')"> Create</button></div></div>`;
-var tempSm4 = `<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('4')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('4')"> Add Histogram</button></div><div id="axesPopup4" class="axesPopup axesPopup4"><div id="scatterplot4"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x4" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('4')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y4" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('4')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram4"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x4" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('4')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx4" class="col-2"><button id="CreateBtn4" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('4')"> Create</button></div></div>`;
+let numx = 1;
+let tempMain = `<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('Main')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('Main')"> Add Histogram</button></div><div id="axesPopupMain" class="axesPopup axesPopupMain"><div id="scatterplot"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-xMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelect('Main')"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-yMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelect('Main')"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-xMain" class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="onSelect('Main')"><option value="1" selected >None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBxMain" class="col-2"><button id="CreateBtnMain" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('Main')"> Create</button></div></div>`;
+let tempSm1 = `<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('1')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('1')"> Add Histogram</button></div><div id="axesPopup1" class="axesPopup axesPopup1"><div id="scatterplot1"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('1')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y1" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('1')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram1"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x1" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('1')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx1" class="col-2"><button id="CreateBtn1" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('1')"> Create</button></div></div>`;
+let tempSm2 = `<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('2')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('2')"> Add Histogram</button></div><div id="axesPopup2" class="axesPopup axesPopup2"><div id="scatterplot2"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x2" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('2')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y2" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('2')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram2"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x2" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('2')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx2" class="col-2"><button id="CreateBtn2" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('2')"> Create</button></div></div>`;
+let tempSm3 = `<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('3')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('3')"> Add Histogram</button></div><div id="axesPopup3" class="axesPopup axesPopup3"><div id="scatterplot3"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x3" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('3')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y3" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('3')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram3"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x3" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('3')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx3" class="col-2"><button id="CreateBtn3" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('3')"> Create</button></div></div>`;
+let tempSm4 = `<div class="graphBtnContainerMain"><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectScatter('4')"> Add Scatter Plot</button><button type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" onclick="selectHistogram('4')"> Add Histogram</button></div><div id="axesPopup4" class="axesPopup axesPopup4"><div id="scatterplot4"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="sp-x4" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('4')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div><div class="row"><div class="col-2 xAxisText">Y</div><div class="col-6"><select id="sp-y4" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('4')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="histogram4"><div class="row"><div class="col-2 xAxisText">X</div><div class="col-6"><select id="ht-x4" class="form-select form-select-sm" aria-label=".form-select-sm example"onchange="onSelect('4')"><option value="1" selected>None</option><option value="2">FSC</option><option value="3">SSC</option><option value="4">Green</option><option value="5">Orange</option></select></div></div></div><div id="CreateBtnBx4" class="col-2"><button id="CreateBtn4" type="button" class="btn btn-light btn-sm btnCreate" style="font-size: 9px;" disabled onclick="createGraph('4')"> Create</button></div></div>`;
 
 function resetBrd(graph) {
     switch (graph) {
@@ -491,48 +475,33 @@ function startPlotting() {
     }
     if (BrdMain) {
         clearInterval(myVar);
-        GraphMain.updateDataArray = function () {
-            this.dataX = [];
-            this.dataY = [];
-        };
-        BrdMain.update();
-        myVar = setInterval(() => { updatePlot("Main") }, 1)
+        dataset.dataXMain = [];
+        dataset.dataYMain = [];
+        window.requestAnimationFrame((t) => { updatePlot(t, "Main") })
     }
     if (Brd1) {
         clearInterval(myVar1);
-        Graph1.updateDataArray = function () {
-            this.dataX = [];
-            this.dataY = [];
-        };
-        Brd1.update();
-        myVar1 = setInterval(() => { updatePlot("1") }, 1)
+        dataset.dataX1 = [];
+        dataset.dataY1 = [];
+        window.requestAnimationFrame((t) => { updatePlot(t, "1") })
     }
     if (Brd2) {
         clearInterval(myVar2);
-        Graph2.updateDataArray = function () {
-            this.dataX = [];
-            this.dataY = [];
-        };
-        Brd2.update();
-        myVar2 = setInterval(() => { updatePlot("2") }, 1)
+        dataset.dataX2 = [];
+        dataset.dataY2 = [];
+        window.requestAnimationFrame((t) => { updatePlot(t, "2") })
     }
     if (Brd3) {
         clearInterval(myVar3);
-        Graph3.updateDataArray = function () {
-            this.dataX = [];
-            this.dataY = [];
-        };
-        Brd3.update();
-        myVar3 = setInterval(() => { updatePlot("3") }, 1)
+        dataset.dataX3 = [];
+        dataset.dataY3 = [];
+        window.requestAnimationFrame((t) => { updatePlot(t, "3") })
     }
     if (Brd4) {
         clearInterval(myVar4);
-        Graph4.updateDataArray = function () {
-            this.dataX = [];
-            this.dataY = [];
-        };
-        Brd4.update();
-        myVar4 = setInterval(() => { updatePlot("4") }, 1)
+        dataset.dataX4 = [];
+        dataset.dataY4 = [];
+        window.requestAnimationFrame((t) => { updatePlot(t, "4") })
     }
 
 };
@@ -557,28 +526,18 @@ function nextTube() {
     sliderOrangeCurVal = sliderOrange.Value();
 
     if (BrdMain) {
-        dataset.dataXMain = GraphMain.dataX;
-        dataset.dataYMain = GraphMain.dataY;
         clearInterval(myVar);
     }
     if (Brd1) {
-        dataset.dataX1 = Graph1.dataX;
-        dataset.dataY1 = Graph1.dataY;
         clearInterval(myVar1);
     }
     if (Brd2) {
-        dataset.dataX2 = Graph2.dataX;
-        dataset.dataY2 = Graph2.dataY;
         clearInterval(myVar2);
     }
     if (Brd3) {
-        dataset.dataX3 = Graph3.dataX;
-        dataset.dataY3 = Graph3.dataY;
         clearInterval(myVar3);
     }
     if (Brd4) {
-        dataset.dataX4 = Graph4.dataX;
-        dataset.dataY4 = Graph4.dataY;
         clearInterval(myVar4);
     }
     dataRecord.push(dataset);
@@ -646,7 +605,11 @@ function createPlot(graph) {
             y1 = 400;
         }
     }
+    
     dataset["boundingbox" + graph] = [x1, y1, x2, y2];
+    dataset["dataX" + graph] = [];
+    dataset["dataY" + graph] = [];
+    
     switch (graph) {
         case "Main":
             BrdMain = JXG.JSXGraph.initBoard('jxgbox-2', {
@@ -682,17 +645,28 @@ function createPlot(graph) {
         default:
             break;
     }
-    
+    window["Graph" + graph].updateDataArray = function () {
+        this.dataX = dataset["dataX" + graph];
+        this.dataY = dataset["dataY" + graph];
+        // console.log(window["Graph" + graph]);
+    };
+
     document.getElementById('closeGraph' + graph).style.display = 'inline';
 };
 //END OF CreatePlot()
 
 
 //GRAPH UPDATE FUNCTION
-function updatePlot(graph) {
-    var ScatterSliderX, ScatterValueX, ScatterSliderY, ScatterValueY;
-    var HistoSliderX, HistoValueX;
-    window["Graph" + graph].updateDataArray = function () {
+let start, prevTimestamp;
+function updatePlot(timestamp, graph) {
+    
+    if (start === undefined)
+        start = timestamp;
+    const elapsed = timestamp - start;
+
+    if (prevTimestamp !== timestamp){
+        let ScatterSliderX, ScatterValueX, ScatterSliderY, ScatterValueY;
+        let HistoSliderX, HistoValueX;
         //Set Scatter xAxis Filter multiplier
         switch (window["SPXSelect" + graph].value) {
             case '2'://FSC
@@ -750,7 +724,9 @@ function updatePlot(graph) {
                 HistoValueX = jsonObj[currentSample - 1].Orange[countTime[graph]];
                 break;
         };
+    
         let y, x;
+        
         //Scatterplot
         if (window["SelectedGraph" + graph] == 1) {
             //Linear scale X axis
@@ -769,51 +745,76 @@ function updatePlot(graph) {
             else {
                 //Exponential Y axis
                 let value = ScatterValueY * Math.pow(1.2, (ScatterSliderY - 100) / 100 * 5);
-
+    
                 y = Math.floor(Math.log10(value / 10) * 300 / Math.log10(100000 / 10));
-
             }
-
         }
-        // log(val)-log(min))/(log(max)-log(min))
-        // (value - min) * size / (max - min)
-
         //Histogram
         else {
             //Linear Scale
             if (window["HTXSelect"+graph].value === '2' || window["HTXSelect"+graph].value === '3') {
-                // var value = HistoValueX * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5) / 1000;
                 x = Math.floor(HistoValueX * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5) / 1000);
-                // x = Math.floor((value - 0) * 250 / (250000 - 0));
             }
             else {
                 //Exponention Scale
                 let value = HistoValueX * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5);
                 x = Math.floor(Math.log10(value / 10) * 250 / Math.log10(100000 / 10));
             }
-
-            countX = this.dataX.filter(value => value == x).length / 2;
-            // var value = 1 * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5);
+    
+            countX = window["Graph" + graph].dataX.filter(value => value == x).length / 2;
+            // let value = 1 * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5);
             // y = Math.floor((value - 0) * 200 / (200 - 0));
             y = countX;
-            this.dataX.push(x, x, NaN);
-            this.dataY.push(y, y, NaN);
-            y += 1;
+            dataset["dataX" + graph].push(x, x, NaN);
+            dataset["dataY" + graph].push(y, y, NaN);
+            y++;
         }
         
-        this.dataX.push(x, x, NaN);
-        this.dataY.push(y, y, NaN);
+        dataset["dataX" + graph].push(x, x, NaN);
+        dataset["dataY" + graph].push(y, y, NaN);
+        // countTime.Main < 2 ? console.log(dataset) : false;
         
+        if (countTime[graph] < 100) {
+            if (countTime[graph] % 5 === 0) {
+                window["Brd" + graph].update();
+            }
+        }
+        else if (countTime[graph] < 1000) {
+            if (countTime[graph] % 10 === 0) {
+                window["Brd" + graph].update();
+            }
+        }
+        else if (countTime[graph] < 5000) {
+            if (countTime[graph] % 20 === 0) {
+                window["Brd" + graph].update();
+            }
+        }
+        else if (countTime[graph] < 10000) {
+            if (countTime[graph] % 100 === 0) {
+                window["Brd" + graph].update();
+            }
+        }
+        else if (countTime[graph] < 20000) {
+            if (countTime[graph] % 200 === 0) {
+                window["Brd" + graph].update();
+            }
+        }
+        else {
+            window["Brd" + graph].update();
+        }
         countTime[graph]++;
-    };
-    if (jsonObj[currentSample - 1].FSC.length <= (countTime.Main + jsonObj[currentSample - 1].FSC.length - 100)){
-        finishPlotting();
-        if (isRecording) {
-            isDatafinishRecording = true;
-            document.getElementsByClassName('ctr-btn')[2].disabled = false;
+        
+        if (jsonObj[currentSample - 1].FSC.length <= (countTime[graph] + jsonObj[currentSample - 1].FSC.length - 10000)) {
+            finishPlotting();
+            if (isRecording) {
+                isDatafinishRecording = true;
+                document.getElementsByClassName('ctr-btn')[2].disabled = false;
+            }
+        }
+        else {
+            window.requestAnimationFrame((t) => { updatePlot(t, graph) })
         }
     }
-    window["Brd" + graph].update();
 };
 
 function recordData () {
@@ -821,10 +822,10 @@ function recordData () {
         isRecording = true;
         disableGraphControls();
     
-        var arrayOfElements = document.getElementsByClassName('ctr-btn');
-        var lengthOfArray = arrayOfElements.length;
+        let arrayOfElements = document.getElementsByClassName('ctr-btn');
+        let lengthOfArray = arrayOfElements.length;
 
-        for (var i = 0; i < lengthOfArray; i++) {
+        for (let i = 0; i < lengthOfArray; i++) {
             arrayOfElements[i].disabled = 'disable';
         }
         document.getElementById('sampleNameInput').disabled = "disable";
@@ -842,11 +843,6 @@ function finishPlotting () {
     myVar2 ? clearInterval(myVar2) : false;
     myVar3 ? clearInterval(myVar3) : false;
     myVar4 ? clearInterval(myVar4) : false;
-}
-var smallGraphsCheckList = {
-    hasGreenHisto: false,
-    hasOrangeHisto: false,
-    hasGrnOrnScatter: false
 }
 function checkSmallGraphSetup (){
     for (let index = 1; index < 5; index++) {
@@ -883,7 +879,7 @@ function recreateAllGraphs (){
     disableGraphControls();
     document.getElementById("sample" + currentSample).classList.remove('disabled');
     document.getElementById("sample" + currentSample).classList.add('active');
-    for (var i = 1; i < currentSample; i++) {
+    for (let i = 1; i < currentSample; i++) {
         document.getElementById("sample" + i).classList.remove('disabled');
         document.getElementById("sample" + i).classList.remove('active');
         document.getElementById("sample" + i).classList.add('done');
@@ -918,9 +914,9 @@ function disableGraphControls () {
         sliderBrd.removeEventHandlers();
     }
     allowedSliderChange = false;
-    var arrayOfElements = document.getElementsByClassName('graphBtnContainerMain');
-    var lengthOfArray = arrayOfElements.length;
-    for (var i = 0; i < lengthOfArray; i++) {
+    let arrayOfElements = document.getElementsByClassName('graphBtnContainerMain');
+    let lengthOfArray = arrayOfElements.length;
+    for (let i = 0; i < lengthOfArray; i++) {
         arrayOfElements[i].style.display = 'none';
     }
 }
