@@ -646,171 +646,164 @@ function createPlot(graph) {
 
 
 //GRAPH UPDATE FUNCTION
-let start, prevTimestamp;
 function updatePlot(timestamp, graph) {
-    
-    if (start === undefined)
-        start = timestamp;
-    const elapsed = timestamp - start;
+    let ScatterSliderX, ScatterValueX, ScatterSliderY, ScatterValueY;
+    let HistoSliderX, HistoValueX;
+    //Set Scatter xAxis Filter multiplier
+    switch (window["SPXSelect" + graph].value) {
+        case '2'://FSC
+            ScatterSliderX = sliderFSC.Value();
+            ScatterValueX = jsonObj[currentSample - 1].FSC[countTime[graph]];
+            break;
+        case '3'://SSC
+            ScatterSliderX = sliderSSC.Value();
+            ScatterValueX = jsonObj[currentSample - 1].SSC[countTime[graph]];
+            break;
+        case '4'://Green
+            ScatterSliderX = sliderGreen.Value();
+            ScatterValueX = jsonObj[currentSample - 1].Green[countTime[graph]];
+            break;
+        case '5'://Orange
+            ScatterSliderX = sliderOrange.Value();
+            ScatterValueX = jsonObj[currentSample - 1].Orange[countTime[graph]];
+            break;
+    };
+    //Set Scatter yAxis Filter multiplier
+    switch (window["SPYSelect" + graph].value) {
+        case '2'://FSC
+            ScatterSliderY = sliderFSC.Value();
+            ScatterValueY = jsonObj[currentSample - 1].FSC[countTime[graph]];
+            break;
+        case '3'://SSC
+            ScatterSliderY = sliderSSC.Value();
+            ScatterValueY = jsonObj[currentSample - 1].SSC[countTime[graph]];
+            break;
+        case '4'://Green
+            ScatterSliderY = sliderGreen.Value();
+            ScatterValueY = jsonObj[currentSample - 1].Green[countTime[graph]];
+            break;
+        case '5'://Orange
+            ScatterSliderY = sliderOrange.Value();
+            ScatterValueY = jsonObj[currentSample - 1].Orange[countTime[graph]];
+            break;
+    };
+    //Set Histo xAxis Filter multiplier
+    switch (window["HTXSelect"+graph].value) {
+        case '2'://FSC
+            HistoSliderX = sliderFSC.Value();
+            HistoValueX = jsonObj[currentSample - 1].FSC[countTime[graph]];
+            break;
+        case '3'://SSC
+            HistoSliderX = sliderSSC.Value();
+            HistoValueX = jsonObj[currentSample - 1].SSC[countTime[graph]];
+            break;
+        case '4'://Green
+            HistoSliderX = sliderGreen.Value();
+            HistoValueX = jsonObj[currentSample - 1].Green[countTime[graph]];
+            break;
+        case '5'://Orange
+            HistoSliderX = sliderOrange.Value();
+            HistoValueX = jsonObj[currentSample - 1].Orange[countTime[graph]];
+            break;
+    };
 
-    if (prevTimestamp !== timestamp){
-        let ScatterSliderX, ScatterValueX, ScatterSliderY, ScatterValueY;
-        let HistoSliderX, HistoValueX;
-        //Set Scatter xAxis Filter multiplier
-        switch (window["SPXSelect" + graph].value) {
-            case '2'://FSC
-                ScatterSliderX = sliderFSC.Value();
-                ScatterValueX = jsonObj[currentSample - 1].FSC[countTime[graph]];
-                break;
-            case '3'://SSC
-                ScatterSliderX = sliderSSC.Value();
-                ScatterValueX = jsonObj[currentSample - 1].SSC[countTime[graph]];
-                break;
-            case '4'://Green
-                ScatterSliderX = sliderGreen.Value();
-                ScatterValueX = jsonObj[currentSample - 1].Green[countTime[graph]];
-                break;
-            case '5'://Orange
-                ScatterSliderX = sliderOrange.Value();
-                ScatterValueX = jsonObj[currentSample - 1].Orange[countTime[graph]];
-                break;
-        };
-        //Set Scatter yAxis Filter multiplier
-        switch (window["SPYSelect" + graph].value) {
-            case '2'://FSC
-                ScatterSliderY = sliderFSC.Value();
-                ScatterValueY = jsonObj[currentSample - 1].FSC[countTime[graph]];
-                break;
-            case '3'://SSC
-                ScatterSliderY = sliderSSC.Value();
-                ScatterValueY = jsonObj[currentSample - 1].SSC[countTime[graph]];
-                break;
-            case '4'://Green
-                ScatterSliderY = sliderGreen.Value();
-                ScatterValueY = jsonObj[currentSample - 1].Green[countTime[graph]];
-                break;
-            case '5'://Orange
-                ScatterSliderY = sliderOrange.Value();
-                ScatterValueY = jsonObj[currentSample - 1].Orange[countTime[graph]];
-                break;
-        };
-        //Set Histo xAxis Filter multiplier
-        switch (window["HTXSelect"+graph].value) {
-            case '2'://FSC
-                HistoSliderX = sliderFSC.Value();
-                HistoValueX = jsonObj[currentSample - 1].FSC[countTime[graph]];
-                break;
-            case '3'://SSC
-                HistoSliderX = sliderSSC.Value();
-                HistoValueX = jsonObj[currentSample - 1].SSC[countTime[graph]];
-                break;
-            case '4'://Green
-                HistoSliderX = sliderGreen.Value();
-                HistoValueX = jsonObj[currentSample - 1].Green[countTime[graph]];
-                break;
-            case '5'://Orange
-                HistoSliderX = sliderOrange.Value();
-                HistoValueX = jsonObj[currentSample - 1].Orange[countTime[graph]];
-                break;
-        };
+    let y, x;
     
-        let y, x;
-        
-        //Scatterplot
-        if (window["SelectedGraph" + graph] == 1) {
-            //Linear scale X axis
-            if (window["SPXSelect"+graph].value === '2' || window["SPXSelect"+graph].value === '3') {
-                x = Math.floor(ScatterValueX * Math.pow(1.2, (ScatterSliderX - 100) / 100 * 5) / 100);
-            }
-            else {
-                //Exponential X axis
-                let value = ScatterValueX * Math.pow(1.2, (ScatterSliderX - 100) / 100 * 5);
-                x = Math.floor(Math.log10(value / 10) * 300 / Math.log10(100000 / 10));
-            }
-            //Linear scale Y axis
-            if (window["SPYSelect" + graph].value === '2' || window["SPYSelect" + graph].value === '3') {
-                y = Math.floor(ScatterValueY * Math.pow(1.2, (ScatterSliderY - 100) / 100 * 5) / 100);
-            }
-            else {
-                //Exponential Y axis
-                let value = ScatterValueY * Math.pow(1.2, (ScatterSliderY - 100) / 100 * 5);
-    
-                y = Math.floor(Math.log10(value / 10) * 300 / Math.log10(100000 / 10));
-            }
-        }
-        //Histogram
-        else {
-            //Linear Scale
-            if (window["HTXSelect"+graph].value === '2' || window["HTXSelect"+graph].value === '3') {
-                x = Math.floor(HistoValueX * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5) / 1000);
-            }
-            else {
-                //Exponention Scale
-                let value = HistoValueX * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5);
-                x = Math.floor(Math.log10(value / 10) * 250 / Math.log10(100000 / 10));
-            }
-    
-            countX = window["Graph" + graph].dataX.filter(value => value == x).length / 2;
-            // let value = 1 * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5);
-            // y = Math.floor((value - 0) * 200 / (200 - 0));
-            y = countX;
-            dataset["dataX" + graph].push(x, x, NaN);
-            dataset["dataY" + graph].push(y, y, NaN);
-            y++;
-        }
-        
-        dataset["dataX" + graph].push(x, x, NaN);
-        dataset["dataY" + graph].push(y, y, NaN);
-        // countTime.Main < 2 ? console.log(dataset) : false;
-        
-        if (countTime[graph] < 100) {
-            if (countTime[graph] % 5 === 0) {
-                window["Brd" + graph].update();
-            }
-        }
-        else if (countTime[graph] < 1000) {
-            if (countTime[graph] % 10 === 0) {
-                window["Brd" + graph].update();
-            }
-        }
-        else if (countTime[graph] < 5000) {
-            if (countTime[graph] % 20 === 0) {
-                window["Brd" + graph].update();
-            }
-        }
-        else if (countTime[graph] < 10000) {
-            if (countTime[graph] % 100 === 0) {
-                window["Brd" + graph].update();
-            }
-        }
-        else if (countTime[graph] < 20000) {
-            if (countTime[graph] % 200 === 0) {
-                window["Brd" + graph].update();
-            }
+    //Scatterplot
+    if (window["SelectedGraph" + graph] == 1) {
+        //Linear scale X axis
+        if (window["SPXSelect"+graph].value === '2' || window["SPXSelect"+graph].value === '3') {
+            x = Math.floor(ScatterValueX * Math.pow(1.2, (ScatterSliderX - 100) / 100 * 5) / 100);
         }
         else {
-            window["Brd" + graph].update();
+            //Exponential X axis
+            let value = ScatterValueX * Math.pow(1.2, (ScatterSliderX - 100) / 100 * 5);
+            x = Math.floor(Math.log10(value / 10) * 300 / Math.log10(100000 / 10));
         }
-        countTime[graph]++;
-        
-        if (jsonObj[currentSample - 1].FSC.length <= (countTime[graph]) ||
-            jsonObj[currentSample - 1].SSC.length <= (countTime[graph]) ||
-            jsonObj[currentSample - 1].Green.length <= (countTime[graph])||
-            jsonObj[currentSample - 1].Orange.length <= (countTime[graph])) {
-            showFeedback("DATA_FINISHED_PLOTTING");
-            if (isRecording) {
-                isRecording = false;
-                isDatafinishRecording = true;
-                dataset.sampleName = document.getElementById('sampleNameInput').value;
-                dataRecord.push(dataset);
-                numOfUsedSample++;
-                document.getElementsByClassName('ctr-btn')[2].disabled = false;
-            }
+        //Linear scale Y axis
+        if (window["SPYSelect" + graph].value === '2' || window["SPYSelect" + graph].value === '3') {
+            y = Math.floor(ScatterValueY * Math.pow(1.2, (ScatterSliderY - 100) / 100 * 5) / 100);
         }
         else {
-            window.requestAnimationFrame((t) => { updatePlot(t, graph) })
+            //Exponential Y axis
+            let value = ScatterValueY * Math.pow(1.2, (ScatterSliderY - 100) / 100 * 5);
+
+            y = Math.floor(Math.log10(value / 10) * 300 / Math.log10(100000 / 10));
         }
     }
+    //Histogram
+    else {
+        //Linear Scale
+        if (window["HTXSelect"+graph].value === '2' || window["HTXSelect"+graph].value === '3') {
+            x = Math.floor(HistoValueX * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5) / 1000);
+        }
+        else {
+            //Exponention Scale
+            let value = HistoValueX * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5);
+            x = Math.floor(Math.log10(value / 10) * 250 / Math.log10(100000 / 10));
+        }
+
+        countX = window["Graph" + graph].dataX.filter(value => value == x).length / 2;
+        // let value = 1 * Math.pow(1.2, (HistoSliderX - 100) / 100 * 5);
+        // y = Math.floor((value - 0) * 200 / (200 - 0));
+        y = countX;
+        dataset["dataX" + graph].push(x, x, NaN);
+        dataset["dataY" + graph].push(y, y, NaN);
+        y++;
+    }
+    
+    dataset["dataX" + graph].push(x, x, NaN);
+    dataset["dataY" + graph].push(y, y, NaN);
+    // countTime.Main < 2 ? console.log(dataset) : false;
+    
+    if (countTime[graph] < 100) {
+        if (countTime[graph] % 5 === 0) {
+            window["Brd" + graph].update();
+        }
+    }
+    else if (countTime[graph] < 1000) {
+        if (countTime[graph] % 10 === 0) {
+            window["Brd" + graph].update();
+        }
+    }
+    else if (countTime[graph] < 5000) {
+        if (countTime[graph] % 20 === 0) {
+            window["Brd" + graph].update();
+        }
+    }
+    else if (countTime[graph] < 10000) {
+        if (countTime[graph] % 100 === 0) {
+            window["Brd" + graph].update();
+        }
+    }
+    else if (countTime[graph] < 20000) {
+        if (countTime[graph] % 200 === 0) {
+            window["Brd" + graph].update();
+        }
+    }
+    else {
+        window["Brd" + graph].update();
+    }
+    countTime[graph]++;
+    
+    if (jsonObj[currentSample - 1].FSC.length <= (countTime[graph]) ||
+        jsonObj[currentSample - 1].SSC.length <= (countTime[graph]) ||
+        jsonObj[currentSample - 1].Green.length <= (countTime[graph])||
+        jsonObj[currentSample - 1].Orange.length <= (countTime[graph])) {
+        showFeedback("DATA_FINISHED_PLOTTING");
+        if (isRecording) {
+            isRecording = false;
+            isDatafinishRecording = true;
+            dataset.sampleName = document.getElementById('sampleNameInput').value;
+            dataRecord.push(dataset);
+            numOfUsedSample++;
+            document.getElementsByClassName('ctr-btn')[2].disabled = false;
+        }
+    }
+    else {
+        window.requestAnimationFrame((t) => { updatePlot(t, graph) })
+    }
+    
 };
 
 function recordData () {
