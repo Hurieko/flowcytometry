@@ -52,6 +52,7 @@ button {
 .ctr-btn {
     width: 140px;
     margin-bottom: 7px;
+    font-weight: 600;
 }
 
 .ctr-btn:hover {
@@ -454,7 +455,7 @@ button {
 
 .filterLabelFSC {
     position: absolute;
-    top: -4px;
+    top: 2px;
     width: 45px;
     padding: 2px 0;
     font-size: 12px;
@@ -465,7 +466,7 @@ button {
 
 .filterLabelSSC {
     position: absolute;
-    top: 24px;
+    top: 30px;
     width: 45px;
     padding: 2px 0;
     font-size: 12px;
@@ -476,7 +477,7 @@ button {
 
 .filterLabelGreen {
     position: absolute;
-    top: 52px;
+    top: 58px;
     width: 45px;
     padding: 2px 0;
     font-size: 12px;
@@ -487,7 +488,7 @@ button {
 
 .filterLabelOrange {
     position: absolute;
-    top: 80px;
+    top: 86px;
     width: 45px;
     padding: 2px 0;
     font-size: 12px;
@@ -552,10 +553,6 @@ button {
     margin-bottom: 4rem;
 }
 
-.JXGtext {
-    margin: 0px 0px 0px 10px;
-}
-
 .datacontrol-container {
     border-right: 2px solid #454545;
     border-left: 2px solid #454545;
@@ -584,4 +581,9 @@ button {
     margin-top: 15px;
     text-align: center;
     width: 388px;
+}
+
+.sliderLabel {
+    margin: 0px 0px 0px 10px;
+    font-weight: 600;
 }

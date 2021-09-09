@@ -259,10 +259,10 @@ function setAxis(graph) {
             break;
 
     }
-    xAxis.style.visibility = 'visible';
-    yAxis.style.visibility = 'visible';
-    xlabel.style.visibility = 'visible';
-    ylabel.style.visibility = 'visible';
+    xAxis.style.display = 'block';
+    yAxis.style.display = 'block';
+    xlabel.style.display = 'block';
+    ylabel.style.display = 'block';
 };
 function hideAxis(graph) {
     let xAxis = document.getElementById("xAxis" + graph);
@@ -288,38 +288,45 @@ function createSlider (){
     });
     
     sliderFSC = sliderBrd.create('slider', [[0, 7], [10, 7], [100, sliderFSCCurVal, 1000]], {
-        baseline: { strokeColor: 'white' },
-        highline: { strokeColor: '#2FABEB' },
+        baseline: { strokeColor: 'white', strokeWidth: 5 },
+        highline: { strokeColor: '#2FABEB', strokeWidth: 5 },
         strokeWidth: 0,
+        size: 7,
         snapWidth: 100,
-        label: { strokeColor: 'white' },
+        label: { strokeColor: '#2FABEB', highlight: false, cssClass:"sliderLabel"},
         precision: 0,
         highlight: false
     });
     sliderSSC = sliderBrd.create('slider', [[0, 5], [10, 5], [100, sliderSSCCurVal, 1000]], {
         snapWidth: 100,
-        baseline: { strokeColor: 'white' },
-        highline: { strokeColor: '#2FABEB' },
+        baseline: { strokeColor: 'white', strokeWidth: 5 },
+        highline: { strokeColor: '#2FABEB', strokeWidth: 5 },
         strokeWidth: 0,
-        label: { strokeColor: 'white' },
+        size: 7,
+        strokeWidth: 0,
+        label: {  strokeColor: '#2FABEB', highlight: false, cssClass:"sliderLabel" },
         precision: 0,
         highlight: false
     });
     sliderGreen = sliderBrd.create('slider', [[0, 3], [10, 3], [100, sliderGreenCurVal, 1000]], {
         snapWidth: 100,
-        baseline: { strokeColor: 'white' },
-        highline: { strokeColor: '#2FABEB' },
+        baseline: { strokeColor: 'white', strokeWidth: 5 },
+        highline: { strokeColor: '#2FABEB', strokeWidth: 5 },
         strokeWidth: 0,
-        label: { strokeColor: 'white' },
+        size: 7,
+        strokeWidth: 0,
+        label: {  strokeColor: '#2FABEB', highlight: false, cssClass:"sliderLabel" },
         precision: 0,
         highlight: false
     });
     sliderOrange = sliderBrd.create('slider', [[0, 1], [10, 1], [100, sliderOrangeCurVal, 1000]], {
         snapWidth: 100,
-        baseline: { strokeColor: 'white' },
-        highline: { strokeColor: '#2FABEB' },
+        baseline: { strokeColor: 'white', strokeWidth: 5 },
+        highline: { strokeColor: '#2FABEB', strokeWidth: 5 },
         strokeWidth: 0,
-        label: { strokeColor: 'white' },
+        size: 7,
+        strokeWidth: 0,
+        label: {  strokeColor: '#2FABEB', highlight: false, cssClass:"sliderLabel" },
         precision: 0,
         highlight: false
     });
