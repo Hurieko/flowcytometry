@@ -56,7 +56,7 @@
         var feedbackTemp = '<div id="feedback" class="feedback">'+
                         '<div class="feedbackcontents">'+
                         '<p id="feedbackTxt">It is essential that you start with the unstained control. Please try again.</p>'+
-                        '<button onclick="closeFeedback()">Close</button>'+
+                        '<button id="closefeedback" onclick="closeFeedback()">Close</button>'+
                         '</div>'+
                         '</div>';
 
@@ -89,6 +89,7 @@
             }
             document.getElementById("container").insertAdjacentHTML("afterbegin" , feedbackTemp);
             document.getElementById("feedbackTxt").innerHTML = feedbackMsg[msg];
+            document.getElementById("closefeedback").focus();
         }
         function closeFeedback (){
             var feedback = document.getElementById("feedback");

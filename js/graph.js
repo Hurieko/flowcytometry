@@ -271,10 +271,10 @@ function hideAxis(graph) {
     let ylabel = document.getElementById("yLabel" + graph);
     xAxis.classList.remove('linear', 'exp', 'count');
     yAxis.classList.remove('linear', 'exp', 'count');
-    xAxis.style.visibility = 'hidden';
-    yAxis.style.visibility = 'hidden';
-    xlabel.style.visibility = 'hidden';
-    ylabel.style.visibility = 'hidden';
+    xAxis.style.display = 'none';
+    yAxis.style.display = 'none';
+    xlabel.style.display = 'none';
+    ylabel.style.display = 'none';
 }
 //END DOM
 
@@ -454,7 +454,7 @@ function resetBrd(graph) {
 }
 
 function startPlotting() {
-    hasDataAcquired = true;
+    
     checkSmallGraphSetup();
     let sampleName = document.getElementById("sampleNameInput").value;
     if (sampleName == "") {
@@ -469,6 +469,7 @@ function startPlotting() {
         showFeedback("WRONG_SMALL_GRAPH");
         return false;
     }
+    
     countTime = {
         "Main": 0,
         "1": 0,
@@ -531,6 +532,7 @@ function startPlotting() {
             requestUpdate4 = window.requestAnimationFrame((t) => { updatePlot(t, "4"); })
         }
     }
+    hasDataAcquired = true;
     return true;
 };
 
