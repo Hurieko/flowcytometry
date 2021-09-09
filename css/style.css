@@ -6,14 +6,14 @@
 .top-panel {
     background: url("../assets/images/background-pattern.jpg") repeat 0 0;
     border-radius: 3px 3px 0 0;
-    padding: 10px;
+    padding: 0px 8px 8px 8px;
     color: #2FABEB;
     margin-bottom: 30px;
 }
 
 .graph-panel {
     height: 400px;
-    padding: 10px 10px 20px 50px;
+    padding: 10px 10px 20px 60px;
 }
 
 button {
@@ -22,15 +22,15 @@ button {
 
 #jxgbox-1 {
     display: inline-block;
-    width: 290px;
-    height: 100px;
+    width: 300px;
+    height: 125px;
     border: 1px;
     border-color: black;
     background: url("../assets/images/background-pattern.jpg") repeat 0 0;
 }
 
 #jxgbox-2 {
-    margin-top: 5px;
+    margin-top: 9px;
     width: 304px;
     height: 304px;
 }
@@ -50,8 +50,8 @@ button {
 }
 
 .ctr-btn {
-    width: 115px;
-    margin-bottom: 5px;
+    width: 140px;
+    margin-bottom: 7px;
 }
 
 .ctr-btn:hover {
@@ -65,11 +65,11 @@ button {
 }
 
 .sm-graph-col1 {
-    padding-left: 40px;
+    padding-left: 45px;
 }
 
 .sm-graph-col2 {
-    padding-left: 50px;
+    padding-left: 65px;
 }
 
 .form-select-sm {
@@ -106,6 +106,7 @@ button {
     color: #fff;
     line-height: 48px;
     box-sizing: border-box;
+    text-align: center;
 }
 
 .disabled {
@@ -129,27 +130,28 @@ button {
 .samples {
     width: 100%;
     border-bottom: 4px solid #2fabeb;
-    text-align: center;
+    padding-left: 10px;
 }
 
 .sampleData .labelInput {
     width: 165px;
     height: 22px;
-    margin: 10px 0 0 25px;
+    margin: 10px 0 0 5px;
     border: none;
     border-bottom-color: currentcolor;
     border-bottom-style: none;
     border-bottom-width: medium;
     background: transparent;
     border-bottom: 2px solid #2fabeb;
-    font-size: 16px;
+    font-size: 20px;
     color: #bcbcbc;
 }
 
 .sampleData .sampleIdLabel {
     margin: 5px 0 0 5px;
-    font-size: 12px;
+    font-size: 14px;
     color: #2fabeb;
+    font-weight: 600;
 }
 
 .sampleBtn::before {
@@ -417,7 +419,7 @@ button {
 .graphContainer .close {
     position: absolute;
     top: 5px;
-    right: 14px;
+    right: 10px;
     width: 20px;
     height: 20px;
     padding: 0;
@@ -452,7 +454,7 @@ button {
 
 .filterLabelFSC {
     position: absolute;
-    top: -7px;
+    top: -4px;
     width: 45px;
     padding: 2px 0;
     font-size: 12px;
@@ -463,7 +465,7 @@ button {
 
 .filterLabelSSC {
     position: absolute;
-    top: 17px;
+    top: 24px;
     width: 45px;
     padding: 2px 0;
     font-size: 12px;
@@ -474,7 +476,7 @@ button {
 
 .filterLabelGreen {
     position: absolute;
-    top: 40px;
+    top: 52px;
     width: 45px;
     padding: 2px 0;
     font-size: 12px;
@@ -485,7 +487,7 @@ button {
 
 .filterLabelOrange {
     position: absolute;
-    top: 63px;
+    top: 80px;
     width: 45px;
     padding: 2px 0;
     font-size: 12px;
@@ -552,4 +554,34 @@ button {
 
 .JXGtext {
     margin: 0px 0px 0px 10px;
+}
+
+.datacontrol-container {
+    border-right: 2px solid #454545;
+    border-left: 2px solid #454545;
+    text-align: center;
+}
+
+.controltitle {
+    margin-bottom: 12px;
+    font-size: 17px;
+    color: #2fabeb;
+    text-align: center;
+}
+
+.filtertitle {
+    margin-bottom: 12px;
+    font-size: 17px;
+    color: #2fabeb;
+}
+
+.voltage {
+    position: absolute;
+    top: 7px;
+    font-size: 10px;
+    font-weight: bold;
+    color: #2fabeb;
+    margin-top: 15px;
+    text-align: center;
+    width: 388px;
 }

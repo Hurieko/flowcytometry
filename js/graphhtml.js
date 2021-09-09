@@ -1,7 +1,7 @@
 var graphDOM = '<div id="container" class="scene container">'+
 '<!--Control Panel-->'+
 '<div class="row top-panel">'+
-'<div class="col-5 sampleData">'+
+'<div class="col-4 sampleData">'+
 '<div class="samples">'+
 '<div id="sample1" class="sampleBtn active" onclick="reviewGraph(1)">A</div>'+
 '<div id="sample2" class="sampleBtn disabled" onclick="reviewGraph(2)">B</div>'+
@@ -11,13 +11,15 @@ var graphDOM = '<div id="container" class="scene container">'+
 '<div class="sampleIdLabel">Sample ID</div>'+
 '<input id="sampleNameInput" placeholder="Label your sample" class="labelInput"></input>'+
 '</div>'+
-'<div class="col-2">'+
-'<button type="button" class="btn btn-light ctr-btn" onclick="startPlotting()">AcquireData</button>'+
-'<button type="button" class="btn btn-light ctr-btn" onclick="recordData()">RecordData</button>'+
-'<button type="button" class="btn btn-light ctr-btn" onclick="nextTube()">NextTube</button>'+
+'<div class="col-3 datacontrol-container">'+
+'<div class="controltitle">Acquisition Control</div>'+
+'<button type="button" class="btn btn-light ctr-btn" onclick="startPlotting()">Acquire Data</button>'+
+'<button type="button" class="btn btn-light ctr-btn" onclick="recordData()">Record Data</button>'+
+'<button type="button" class="btn btn-light ctr-btn" onclick="nextTube()">Next Tube</button>'+
 '</div>'+
-'<div class="col-5 align-self-center">'+
-'Filters'+
+'<div class="col-5">'+
+'<div class="filtertitle">Filters</div>' +
+'<div class="voltage">Voltage</div>'+
 '<div class="row" style="padding-top: 5px">'+
 '<div class="filter">'+
 '<div class="filterLabelFSC">FSC</div>'+
