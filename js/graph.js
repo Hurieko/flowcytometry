@@ -1,10 +1,9 @@
 
 //DOM Script
 var currentSample = 1;
-var sampleName
-var dataset = {
-    id: 'sample' + currentSample
-};
+var viewingSample = 1;
+var dataRecord = [];
+var dataset = {};
 var isRecording = false;
 var isDatafinishRecording = false;
 var hasDataAcquired = false;
@@ -102,7 +101,6 @@ function reDefineDOMElem() {
 
 }
 
-var myVar, myVar1, myVar2, myVar3, myVar4;
 //Main Graph Control Functions
 function selectScatter (graph) {
     hideAxesPopup();
@@ -353,7 +351,6 @@ let tempSm4 = `<div class="graphBtnContainerMain"><button type="button" class="b
 function resetBrd(graph) {
     switch (graph) {
         case 'Main'://main board
-            clearInterval(myVar);
             JXG.JSXGraph.freeBoard(BrdMain);
             document.getElementById('jxgbox-2').innerHTML = tempMain;
             document.getElementById("jxgbox-2").classList.toggle("dashed");
@@ -372,7 +369,6 @@ function resetBrd(graph) {
 
             break;
         case '1'://Small Board 1
-            clearInterval(myVar1);
             JXG.JSXGraph.freeBoard(Brd1);
             document.getElementById('jxgbox-3').innerHTML = tempSm1;
             document.getElementById("jxgbox-3").classList.toggle("dashed");
@@ -391,7 +387,6 @@ function resetBrd(graph) {
 
             break;
         case '2'://Small Board 2
-            clearInterval(myVar2);
             JXG.JSXGraph.freeBoard(Brd2);
             document.getElementById('jxgbox-4').innerHTML = tempSm2;
             document.getElementById("jxgbox-4").classList.toggle("dashed");
@@ -410,7 +405,6 @@ function resetBrd(graph) {
 
             break;
         case '3'://Small Board 3
-            clearInterval(myVar3);
             JXG.JSXGraph.freeBoard(Brd3);
             document.getElementById('jxgbox-5').innerHTML = tempSm3;
             document.getElementById("jxgbox-5").classList.toggle("dashed");
@@ -429,7 +423,6 @@ function resetBrd(graph) {
 
             break;
         case '4'://Small Board 4
-            clearInterval(myVar4);
             JXG.JSXGraph.freeBoard(Brd4);
             document.getElementById('jxgbox-6').innerHTML = tempSm4;
             document.getElementById("jxgbox-6").classList.toggle("dashed");
@@ -453,7 +446,7 @@ function resetBrd(graph) {
 function startPlotting() {
     hasDataAcquired = true;
     checkSmallGraphSetup();
-    sampleName = document.getElementById("sampleNameInput").value;
+    let sampleName = document.getElementById("sampleNameInput").value;
     if (sampleName == "") {
         showFeedback("NO_SAMPLE_NAME");
         return false;
@@ -474,43 +467,41 @@ function startPlotting() {
         "4": 0
     }
     if (BrdMain) {
-        clearInterval(myVar);
         dataset.dataXMain = [];
         dataset.dataYMain = [];
         window.requestAnimationFrame((t) => { updatePlot(t, "Main") })
     }
     if (Brd1) {
-        clearInterval(myVar1);
         dataset.dataX1 = [];
         dataset.dataY1 = [];
         window.requestAnimationFrame((t) => { updatePlot(t, "1") })
     }
     if (Brd2) {
-        clearInterval(myVar2);
         dataset.dataX2 = [];
         dataset.dataY2 = [];
         window.requestAnimationFrame((t) => { updatePlot(t, "2") })
     }
     if (Brd3) {
-        clearInterval(myVar3);
         dataset.dataX3 = [];
         dataset.dataY3 = [];
         window.requestAnimationFrame((t) => { updatePlot(t, "3") })
     }
     if (Brd4) {
-        clearInterval(myVar4);
         dataset.dataX4 = [];
         dataset.dataY4 = [];
         window.requestAnimationFrame((t) => { updatePlot(t, "4") })
     }
-
+    return true;
 };
 
-var dataRecord = [];
 
 function nextTube() {
     if (!isDatafinishRecording) {
         showFeedback("DATA_NOT_RECORDED");
+        return false;
+    }
+    else if (numOfUsedSample >= 4){
+        showFeedback("SIMULATION_END");
         return false;
     }
     countTime = {
@@ -524,55 +515,54 @@ function nextTube() {
     sliderSSCCurVal = sliderSSC.Value();
     sliderGreenCurVal = sliderGreen.Value();
     sliderOrangeCurVal = sliderOrange.Value();
-
-    if (BrdMain) {
-        clearInterval(myVar);
-    }
-    if (Brd1) {
-        clearInterval(myVar1);
-    }
-    if (Brd2) {
-        clearInterval(myVar2);
-    }
-    if (Brd3) {
-        clearInterval(myVar3);
-    }
-    if (Brd4) {
-        clearInterval(myVar4);
-    }
-    dataRecord.push(dataset);
     currentSample++;
-    numOfUsedSample++;
+    viewingSample = currentSample;
     switchScene("lab");
 }
 
 function reviewGraph(id){
-    
-    switch (id) {
-        case 1:
-            currentSample = 1;
-            if (BrdMain) { JXG.JSXGraph.freeBoard(BrdMain);}
-            if (Brd1) { JXG.JSXGraph.freeBoard(Brd1); }
-            document.getElementById("jxgbox-2").classList.toggle("dashed");
-            document.getElementById("jxgbox-3").classList.toggle("dashed");
-            document.getElementById('closeGraphMain').style.display = 'none';
-            document.getElementById('closeGraph1').style.display = 'none';
-            BrdMain = JXG.JSXGraph.initBoard('jxgbox-2', {
-                boundingbox: dataRecord[0].boundingboxMain, axis: false, showCopyright: false, showInfobox: false, showNavigation: false
-            });
-            GraphMain = BrdMain.create('curve', [[], []], {
-                strokeWidth: 1, strokeColor: '#4E4E4E' });
-            GraphMain.updateDataArray = function () {
-                this.dataX = dataRecord[0].dataXMain;
-                this.dataY = dataRecord[0].dataYMain;
-            };
-            BrdMain.update();
-            break;
-    
-        default:
-            break;
-    }
+    if (viewingSample != id && !isRecording) {
+        viewingSample = id;
+        //Viewing Old or Recorded Samples
+        if (viewingSample <= numOfUsedSample) {
+            dataset = {...dataRecord[id - 1]};
+                
+            disableDataAcquisitionControl();
+            document.getElementById('sampleNameInput').value = dataset.sampleName;
+            callBoardUpdate();
+            if (viewingSample == numOfUsedSample) {
+                document.getElementsByClassName('ctr-btn')[2].disabled = false;
+            }
+        }
+        //When goin back to current on going sample
+        else{
+            dataset = {};
+            dataset.dataXMain = [];
+            dataset.dataYMain = [];
+            dataset.dataX1 = [];
+            dataset.dataY1 = [];
+            dataset.dataX2 = [];
+            dataset.dataY2 = [];
+            dataset.dataX3 = [];
+            dataset.dataY3 = [];
+            dataset.dataX4 = [];
+            dataset.dataY4 = [];
+            enableDataAcquisitionControl();
+            document.getElementById('sampleNameInput').value = "";
+            callBoardUpdate();
+        }
 
+        for (let i = 1; i <= currentSample; i++) {
+            if (i != id) {
+                document.getElementById("sample" + i).classList.remove('disabled');
+                document.getElementById("sample" + i).classList.remove('active');
+                document.getElementById("sample" + i).classList.add('done');
+            }
+        }
+        document.getElementById("sample" + id).classList.remove('done');
+        document.getElementById("sample" + id).classList.remove('disabled');
+        document.getElementById("sample" + id).classList.add('active');
+    }
     
 }
 
@@ -598,15 +588,14 @@ function createPlot(graph) {
         sw = 1.2;
         if (window["HTXSelect" + graph].value === '2' || window["HTXSelect" + graph].value === '3') {
             x2 = 2500;
-            y1 = 400;
+            y1 = 300;
         }
         else {
             x2 = 250;
-            y1 = 400;
+            y1 = 300;
         }
     }
     
-    dataset["boundingbox" + graph] = [x1, y1, x2, y2];
     dataset["dataX" + graph] = [];
     dataset["dataY" + graph] = [];
     
@@ -804,10 +793,17 @@ function updatePlot(timestamp, graph) {
         }
         countTime[graph]++;
         
-        if (jsonObj[currentSample - 1].FSC.length <= (countTime[graph] + jsonObj[currentSample - 1].FSC.length - 10000)) {
-            finishPlotting();
+        if (jsonObj[currentSample - 1].FSC.length <= (countTime[graph]) ||
+            jsonObj[currentSample - 1].SSC.length <= (countTime[graph]) ||
+            jsonObj[currentSample - 1].Green.length <= (countTime[graph])||
+            jsonObj[currentSample - 1].Orange.length <= (countTime[graph])) {
+            showFeedback("DATA_FINISHED_PLOTTING");
             if (isRecording) {
+                isRecording = false;
                 isDatafinishRecording = true;
+                dataset.sampleName = document.getElementById('sampleNameInput').value;
+                dataRecord.push(dataset);
+                numOfUsedSample++;
                 document.getElementsByClassName('ctr-btn')[2].disabled = false;
             }
         }
@@ -820,30 +816,18 @@ function updatePlot(timestamp, graph) {
 function recordData () {
     if (hasDataAcquired) {
         isRecording = true;
-        disableGraphControls();
-    
-        let arrayOfElements = document.getElementsByClassName('ctr-btn');
-        let lengthOfArray = arrayOfElements.length;
-
-        for (let i = 0; i < lengthOfArray; i++) {
-            arrayOfElements[i].disabled = 'disable';
+        
+        if(startPlotting()) {
+            disableGraphControls();
+            disableDataAcquisitionControl();
         }
-        document.getElementById('sampleNameInput').disabled = "disable";
-        startPlotting();
     }
     else {
         showFeedback("DATA_NOT_ACQUIRED");
     }
 }
 
-function finishPlotting () {
-    showFeedback("DATA_FINISHED_PLOTTING");
-    myVar ? clearInterval(myVar) : false;
-    myVar1 ? clearInterval(myVar1) : false;
-    myVar2 ? clearInterval(myVar2) : false;
-    myVar3 ? clearInterval(myVar3) : false;
-    myVar4 ? clearInterval(myVar4) : false;
-}
+    
 function checkSmallGraphSetup (){
     for (let index = 1; index < 5; index++) {
         //Check for Scatterplot
@@ -868,22 +852,24 @@ function checkSmallGraphSetup (){
     }
 }
 function recreateAllGraphs (){
-    isRecording = false;
+    dataset = {}
     isDatafinishRecording = false;
-    document.getElementById("sampleNameInput").value = sampleName;
-    if(BrdMain) createGraph("Main");
-    if (Brd1)createGraph("1");
-    if (Brd2)createGraph("2");
-    if (Brd3)createGraph("3");
-    if (Brd4)createGraph("4");
+    if(BrdMain){ createGraph("Main") }
+    if (Brd1) {createGraph("1"); }
+    if (Brd2){createGraph("2"); }
+    if (Brd3){createGraph("3"); }
+    if (Brd4){createGraph("4"); }
     disableGraphControls();
+    for (let i = 1; i <= numOfUsedSample; i++) {
+        if (i != currentSample) {
+            document.getElementById("sample" + i).classList.remove('disabled');
+            document.getElementById("sample" + i).classList.remove('active');
+            document.getElementById("sample" + i).classList.add('done');  
+        }
+    }
+    document.getElementById("sample" + currentSample).classList.remove('done');
     document.getElementById("sample" + currentSample).classList.remove('disabled');
     document.getElementById("sample" + currentSample).classList.add('active');
-    for (let i = 1; i < currentSample; i++) {
-        document.getElementById("sample" + i).classList.remove('disabled');
-        document.getElementById("sample" + i).classList.remove('active');
-        document.getElementById("sample" + i).classList.add('done');
-    }
 }
 
 function disableGraphControls () {
@@ -919,4 +905,31 @@ function disableGraphControls () {
     for (let i = 0; i < lengthOfArray; i++) {
         arrayOfElements[i].style.display = 'none';
     }
+}
+
+function disableDataAcquisitionControl () {
+    let arrayOfElements = document.getElementsByClassName('ctr-btn');
+    let lengthOfArray = arrayOfElements.length;
+
+    for (let i = 0; i < lengthOfArray; i++) {
+        arrayOfElements[i].disabled = 'disable';
+    }
+    document.getElementById('sampleNameInput').disabled = "disable";
+}
+function enableDataAcquisitionControl() {
+    let arrayOfElements = document.getElementsByClassName('ctr-btn');
+    let lengthOfArray = arrayOfElements.length;
+
+    for (let i = 0; i < lengthOfArray; i++) {
+        arrayOfElements[i].removeAttribute("disabled");
+    }
+    document.getElementById('sampleNameInput').removeAttribute("disabled");
+}
+
+function callBoardUpdate () {
+    if (BrdMain) { BrdMain.update(); }
+    if (Brd1) { Brd1.update(); }
+    if (Brd2) { Brd2.update(); }
+    if (Brd3) { Brd3.update(); }
+    if (Brd4) { Brd4.update(); }
 }
