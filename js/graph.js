@@ -469,14 +469,14 @@ function startPlotting() {
         showFeedback("WRONG_SMALL_GRAPH");
         return false;
     }
+    suspendBoardUpdate();
+    countTime["Main"] = 0;
+    countTime["1"] = 0;
+    countTime["2"] = 0;
+    countTime["3"] = 0;
+    countTime["4"] = 0;
+
     
-    countTime = {
-        "Main": 0,
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0
-    }
     if (BrdMain) {
         dataset.dataXMain = [];
         dataset.dataYMain = [];
@@ -532,6 +532,7 @@ function startPlotting() {
             requestUpdate4 = window.requestAnimationFrame((t) => { updatePlot(t, "4"); })
         }
     }
+    unsuspendBoardUpdate();
     hasDataAcquired = true;
     return true;
 };
@@ -969,4 +970,20 @@ function callBoardUpdate () {
     if (Brd2) { Brd2.update(); }
     if (Brd3) { Brd3.update(); }
     if (Brd4) { Brd4.update(); }
+}
+
+function suspendBoardUpdate () {
+    if (BrdMain) { BrdMain.suspendUpdate(); }
+    if (Brd1) { Brd1.suspendUpdate(); }
+    if (Brd2) { Brd2.suspendUpdate(); }
+    if (Brd3) { Brd3.suspendUpdate(); }
+    if (Brd4) { Brd4.suspendUpdate(); }
+}
+
+function unsuspendBoardUpdate () {
+    if (BrdMain) { BrdMain.unsuspendUpdate(); }
+    if (Brd1) { Brd1.unsuspendUpdate(); }
+    if (Brd2) { Brd2.unsuspendUpdate(); }
+    if (Brd3) { Brd3.unsuspendUpdate(); }
+    if (Brd4) { Brd4.unsuspendUpdate(); }
 }
