@@ -376,7 +376,7 @@ function resetBrd(graph) {
             SPYSelectMain = document.getElementById("sp-yMain");
             HTXSelectMain = document.getElementById("ht-xMain");
             SPXSelectMain.value = SPYSelectMain.value = HTXSelectMain.value = 1;
-
+            mainGraphIsSet = false;
             break;
         case '1'://Small Board 1
             JXG.JSXGraph.freeBoard(Brd1);
@@ -462,7 +462,8 @@ function startPlotting() {
         return false;
     }
     else if (!mainGraphIsSet) {
-        showFeedback("NO_MAIN_GRAPH");
+        // showFeedback("NO_MAIN_GRAPH");
+        showFeedback("WRONG_SMALL_GRAPH");
         return false;
     }
     else if (!Object.values(smallGraphsCheckList).every(Boolean)) {
@@ -854,9 +855,9 @@ function updatePlot(timestamp, graph) {
 function recordData () {
     if (hasDataAcquired) {
         if (checkFilterRange()) {
-            isRecording = true;
-
+            
             if (startPlotting()) {
+                isRecording = true;
                 disableGraphControls();
                 disableDataAcquisitionControl();
             }
@@ -869,6 +870,11 @@ function recordData () {
 
     
 function checkSmallGraphSetup (){
+    smallGraphsCheckList = {
+        hasGreenHisto: false,
+        hasOrangeHisto: false,
+        hasGrnOrnScatter: false
+    }
     for (let index = 1; index < 5; index++) {
         //Check for Scatterplot
         if (window["SelectedGraph" + index] == 1) {

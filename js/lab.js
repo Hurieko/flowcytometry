@@ -38,6 +38,10 @@ function deselectTube(e) {
 }
 function setup() {
     if (document.getElementById("droparea").children.length > 0) {
+        if (document.getElementById("droparea").children[0].id != "tube1" && numOfUsedSample < 1) {
+            showFeedback("SAMPLE_ORDER_1");
+            return false;
+        }
         switch (document.getElementById("droparea").children[0].id){
             case "tube1":
                 if (numOfUsedSample >= 1) {
