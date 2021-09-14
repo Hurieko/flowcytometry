@@ -853,11 +853,13 @@ function updatePlot(timestamp, graph) {
 
 function recordData () {
     if (hasDataAcquired) {
-        isRecording = true;
-        
-        if(startPlotting()) {
-            disableGraphControls();
-            disableDataAcquisitionControl();
+        if (checkFilterRange()) {
+            isRecording = true;
+
+            if (startPlotting()) {
+                disableGraphControls();
+                disableDataAcquisitionControl();
+            }
         }
     }
     else {
@@ -986,4 +988,26 @@ function unsuspendBoardUpdate () {
     if (Brd2) { Brd2.unsuspendUpdate(); }
     if (Brd3) { Brd3.unsuspendUpdate(); }
     if (Brd4) { Brd4.unsuspendUpdate(); }
+}
+
+function checkFilterRange() {
+    if (sliderFSC.Value() < 300 || sliderFSC.Value() > 400) {
+        showFeedback('FILTER_FSC');
+        return false;
+    }
+    else if (sliderSSC.Value() < 400 || sliderSSC.Value() > 500) {
+        showFeedback('FILTER_SSC');
+        return false;
+    }
+    else if (sliderGreen.Value() < 600 || sliderGreen.Value() > 700) {
+        showFeedback('FILTER_GREEN');
+        return false;
+    }
+    else if (sliderOrange.Value() < 300 || sliderOrange.Value() > 400) {
+        showFeedback('FILTER_ORANGE');
+        return false;
+    }
+    else {
+        return true;
+    }
 }
