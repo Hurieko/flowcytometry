@@ -462,8 +462,8 @@ function startPlotting() {
         return false;
     }
     else if (!mainGraphIsSet) {
-        // showFeedback("NO_MAIN_GRAPH");
-        showFeedback("WRONG_SMALL_GRAPH");
+        showFeedback("NO_MAIN_GRAPH");
+        // showFeedback("WRONG_SMALL_GRAPH");
         return false;
     }
     else if (!Object.values(smallGraphsCheckList).every(Boolean)) {
